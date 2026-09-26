@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight, Building2, Camera, Gavel, Landmark, MapPin, UsersRound } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
+import ScrollToSectionLink from "@/components/ScrollToSectionLink";
 import StructuredData from "@/components/StructuredData";
 import { formatConferenceText } from "@/config/conference";
 import { getPublicContent } from "@/lib/site-settings";
@@ -38,8 +39,8 @@ export default async function Home() {
             <div className="home-hero__wordmark"><h1>MUNAIR</h1><span className="home-hero__year">’27</span></div>
             <p className="home-hero__intro">A student-led conference for people who want to understand the world, challenge assumptions, and make the room move.</p>
             <div className="home-hero__actions">
-              <Link href="#applications" className="hero-cta">Apply <ArrowUpRight aria-hidden="true" /></Link>
-              <Link href="#committees" className="hero-link">See the committees</Link>
+              <ScrollToSectionLink sectionId="applications" className="hero-cta">Apply <ArrowUpRight aria-hidden="true" /></ScrollToSectionLink>
+              <ScrollToSectionLink sectionId="committees" className="hero-link">See the committees</ScrollToSectionLink>
             </div>
           </FadeIn>
           <FadeIn className="home-hero__image" delay={180} direction="left">

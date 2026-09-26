@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Manrope } from "next/font/google";
+import { Bodoni_Moda, DM_Sans, DM_Serif_Display, Instrument_Serif, Manrope, Space_Grotesk } from "next/font/google";
 import Footer from "@/components/Footer";
+import FontVariant from "@/components/FontVariant";
 import SiteNav from "@/components/SiteNav";
 import SmoothScroll from "@/components/SmoothScroll";
 import { getPublicContent, publicSiteUrl } from "@/lib/site-settings";
@@ -16,6 +17,31 @@ const instrument = Instrument_Serif({
   variable: "--font-instrument",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const dmSerif = DM_Serif_Display({
+  variable: "--font-dm-serif",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const space = Space_Grotesk({
+  variable: "--font-space",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -64,9 +90,10 @@ export const viewport: Viewport = { themeColor: "#121D2F", colorScheme: "light d
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const { settings } = await getPublicContent();
   return (
-    <html lang="en" className={`${manrope.variable} ${instrument.variable} scroll-smooth antialiased`}>
+    <html lang="en" className={`${manrope.variable} ${instrument.variable} ${dmSans.variable} ${dmSerif.variable} ${bodoni.variable} ${space.variable} scroll-smooth antialiased`}>
       <body className="min-h-screen bg-[var(--paper)] text-[var(--ink)]">
         <SmoothScroll>
+          <FontVariant />
           <a className="skip-link" href="#main-content">Skip to content</a>
           <SiteNav enabled={settings.sections} />
           <main id="main-content">{children}</main>
