@@ -1,106 +1,90 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, ArrowUpRight, CalendarDays, MapPin, Plane, RadioTower } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, MapPin } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import StructuredData from "@/components/StructuredData";
 import { formatConferenceText } from "@/config/conference";
 import { getPublicContent } from "@/lib/site-settings";
-import { cn } from "@/lib/utils";
 
 const MAPS_URL = "https://maps.app.goo.gl/ZDZUrWwZVSbF21ki8";
 
-function SectionHeading({ code, label, children, inverse = false }: { code: string; label: string; children: React.ReactNode; inverse?: boolean }) {
-  return (
-    <div className="section-heading">
-      <div className="section-heading__meta"><span>{code}</span><span>{label}</span></div>
-      <h2 className={cn("section-heading__title", inverse && "text-white")}>{children}</h2>
-    </div>
-  );
+function Heading({ index, label, children }: { index: string; label: string; children: React.ReactNode }) {
+  return <div className="m-heading"><p><span>{index}</span>{label}</p><h2>{children}</h2></div>;
 }
 
 export default async function Home() {
   const { settings, committees, team } = await getPublicContent();
-  const { conference } = settings;
-  const place = `${conference.location.venue}, ${conference.location.city}`;
 
-  return (
-    <>
-      <StructuredData settings={settings} />
-      <section id="top" className="munair-hero">
-        <div className="hero-grid site-container">
-          <div className="hero-copy"><FadeIn delay={60}>
-            <div className="hero-kicker"><span>Session 03</span><span>Est. 2025</span><span>İzmir</span></div>
-            <h1 className="hero-title"><span>MUN</span><span className="hero-title__air">AIR</span><sup>’27</sup></h1>
-            <p className="hero-deck">A conference shaped by the precision of aviation and the open horizons of diplomacy.</p>
-            <div className="hero-actions">
-              <Link href="#committees" className="flight-button flight-button--primary">Explore the committees <ArrowDown aria-hidden="true" /></Link>
-              <Link href={conference.instagramUrl} target="_blank" rel="noreferrer" className="flight-button flight-button--ghost">{conference.instagramHandle} <ArrowUpRight aria-hidden="true" /></Link>
-            </div>
-          </FadeIn></div>
-          <FadeIn delay={180} className="hero-mark" direction="left">
-            <div className="hero-mark__index" aria-hidden="true">27</div>
-            <Image src="/munair_logo.jpg" alt="MUNAIR globe and wings emblem" width={1080} height={1080} className="hero-logo" priority />
-            <div className="hero-route"><div><span>From</span><strong>İZM</strong></div><Plane aria-hidden="true" /><div><span>To</span><strong>WORLD</strong></div></div>
-          </FadeIn>
+  return <>
+    <StructuredData settings={settings} />
+
+    <section id="top" className="m-hero">
+      <div className="m-hero__rail" aria-hidden="true"><span>MUNAIR / 27</span><span>WINGS OF DIPLOMACY</span></div>
+      <div className="site-container m-hero__stage">
+        <div className="m-hero__topline"><span>Third official session</span><span>Havajet Aviation High School</span><span>İzmir / Türkiye</span></div>
+        <FadeIn className="m-hero__mark" delay={80} direction="none">
+          <Image src="/munair_logo.jpg" alt="MUNAIR globe and wings emblem" width={1080} height={1080} priority />
+        </FadeIn>
+        <FadeIn className="m-hero__type" delay={160}>
+          <h1><span>MUN</span><span>AIR</span></h1>
+          <div><strong>’27</strong><p>Model United Nations<br />of Aviation</p></div>
+        </FadeIn>
+        <div className="m-hero__bottom">
+          <p>A student-led conference for delegates ready to think clearly, speak boldly, and negotiate beyond borders.</p>
+          <Link href="#about">Enter MUNAIR <ArrowDownRight aria-hidden="true" /></Link>
         </div>
-        <div className="hero-strip"><div className="site-container hero-strip__inner">
-          <span><CalendarDays aria-hidden="true" /> {conference.dates}</span>
-          <span><MapPin aria-hidden="true" /> {place}</span>
-          <span><RadioTower aria-hidden="true" /> {conference.hashtag}</span>
-        </div></div>
-      </section>
+      </div>
+    </section>
 
-      {settings.sections.about && <section id="about" className="section-shell bg-[var(--paper)]"><div className="site-container">
-        <SectionHeading code="MNA / 01" label="The conference">Where aviation meets diplomacy.</SectionHeading>
-        <div className="about-layout">
-          <FadeIn className="about-statement"><p>MUNAIR is a student-led Model United Nations conference founded at Havajet Aviation High School in 2025.</p></FadeIn>
-          <FadeIn delay={120} className="about-copy">
-            <p>Our third official session brings delegates into rooms built for serious research, clear argument, and cooperation across different points of view.</p>
-            <p>The aviation setting is more than a theme. It stands for discipline, international connection, and the confidence to move beyond familiar borders.</p>
-            <dl className="about-facts"><div><dt>Session</dt><dd>03</dd></div><div><dt>Founded</dt><dd>2025</dd></div><div><dt>Language</dt><dd>English</dd></div></dl>
-          </FadeIn>
-        </div>
-      </div></section>}
+    {settings.sections.about && <section id="about" className="m-about"><div className="site-container">
+      <Heading index="01" label="About">Diplomacy,<br />with altitude.</Heading>
+      <div className="m-about__body">
+        <FadeIn className="m-about__lead"><p>Founded in 2025 at Havajet Aviation High School, MUNAIR brings the discipline of aviation into the practice of diplomacy.</p></FadeIn>
+        <FadeIn className="m-about__detail" delay={100}><p>Delegates research global questions, represent perspectives beyond their own, and work toward solutions under pressure. The third official session continues that mission in İzmir.</p></FadeIn>
+      </div>
+      <div className="m-facts"><div><span>03</span><p>Official session</p></div><div><span>2025</span><p>Established</p></div><div><span>EN</span><p>Conference language</p></div><div><span>İZM</span><p>Home base</p></div></div>
+    </div></section>}
 
-      {settings.sections.committees && <section id="committees" className="section-shell committee-section"><div className="site-container">
-        <SectionHeading code="MNA / 02" label="Committee roster" inverse>Six rooms. Six different ways to see the world.</SectionHeading>
-        <div className="committee-board">
-          <div className="committee-board__head"><span>Gate</span><span>Committee</span><span>Brief</span><span>Status</span></div>
-          {committees.map((committee, index) => <FadeIn key={committee.id} delay={index * 55}><Link href={`/committees/${committee.slug}`} className="committee-row">
-            <span className="committee-code">{String(index + 1).padStart(2, "0")}</span><strong>{committee.name}</strong><span className="committee-brief">{committee.description}</span><span className="committee-status">Preview <ArrowUpRight aria-hidden="true" /></span>
-          </Link></FadeIn>)}
-        </div>
-        <p className="placeholder-note">Committee names and briefs are working placeholders for layout review.</p>
-      </div></section>}
+    {settings.sections.committees && <section id="committees" className="m-committees"><div className="site-container">
+      <Heading index="02" label="Committees">Global questions.<br />Different rooms.</Heading>
+      <div className="m-committee-list">{committees.map((committee, index) => <FadeIn key={committee.id} delay={index * 45}>
+        <Link href={`/committees/${committee.slug}`} className="m-committee">
+          <span>{String(index + 1).padStart(2, "0")}</span><h3>{committee.name}</h3><p>{committee.description}</p><ArrowUpRight aria-hidden="true" />
+        </Link>
+      </FadeIn>)}</div>
+    </div></section>}
 
-      {settings.sections.letters && <section id="letters" className="section-shell letter-section"><div className="site-container">
-        <SectionHeading code="MNA / 03" label="Letters">A note from the flight deck.</SectionHeading>
-        {settings.letters.map((letter) => <article key={letter.id} className="letter-layout">
-          <FadeIn className="letter-title-block"><span className="letter-quote" aria-hidden="true">“</span><h3>{letter.titlePrefix}<br /><em>{letter.titleHighlight}</em></h3></FadeIn>
-          <FadeIn delay={120} className="letter-body"><p className="letter-opening">{letter.opening},</p>{letter.paragraphs.map((paragraph) => <p key={paragraph}>{formatConferenceText(paragraph, settings)}</p>)}<p className="letter-signature">{letter.author}</p><p className="placeholder-note">Placeholder name — replace from the admin panel.</p></FadeIn>
-        </article>)}
-      </div></section>}
+    {settings.sections.letters && <section id="letters" className="m-letter"><div className="site-container m-letter__grid">
+      <div><p className="m-label"><span>03</span> Letter</p><h2>Before we<br />take flight.</h2></div>
+      {settings.letters.map((letter) => <FadeIn key={letter.id} className="m-letter__copy" delay={100}>
+        <p className="m-letter__opening">{letter.opening},</p>
+        {letter.paragraphs.map((paragraph) => <p key={paragraph}>{formatConferenceText(paragraph, settings)}</p>)}
+        <div className="m-letter__sign"><span>{letter.author}</span><small>MUNAIR’27</small></div>
+      </FadeIn>)}
+    </div></section>}
 
-      {settings.sections.team && <section id="team" className="section-shell team-section"><div className="site-container">
-        <SectionHeading code="MNA / 04" label="Secretariat">The people clearing the runway.</SectionHeading>
-        <div className="team-roster">{team.map((member, index) => <FadeIn key={member.id} delay={index * 70}><Link href={`/team/${member.slug}`} className="team-seat">
-          <span className="team-seat__number">Seat {String(index + 1).padStart(2, "0")}</span><div className="team-seat__portrait">{member.imageUrl ? <Image src={member.imageUrl} alt="" fill unoptimized sizes="(max-width: 768px) 100vw, 25vw" className="object-cover" /> : <span>{member.name.split(" ").map((part) => part[0]).join("").slice(0, 2)}</span>}</div><h3>{member.name}</h3><p>{member.role}</p>
-        </Link></FadeIn>)}</div>
-        <p className="placeholder-note">Names and portraits are placeholders until the MUNAIR’27 secretariat is added.</p>
-      </div></section>}
+    {settings.sections.team && <section id="team" className="m-team"><div className="site-container">
+      <Heading index="04" label="Secretariat">Built by students.<br />Run with purpose.</Heading>
+      <div className="m-team__list">{team.map((member, index) => <FadeIn key={member.id} delay={index * 60}>
+        <Link href={`/team/${member.slug}`} className="m-person">
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <div className="m-person__photo">{member.imageUrl ? <Image src={member.imageUrl} alt="" fill unoptimized sizes="160px" className="object-cover" /> : <b>{member.name.split(" ").map((part) => part[0]).join("").slice(0, 2)}</b>}</div>
+          <div><h3>{member.name}</h3><p>{member.role}</p></div><ArrowUpRight aria-hidden="true" />
+        </Link>
+      </FadeIn>)}</div>
+    </div></section>}
 
-      {settings.sections.applications && <section id="applications" className="section-shell application-section"><div className="site-container application-layout">
-        <div><p className="route-label">MNA / 05 — Applications</p><h2>Find your role<br />on board.</h2><p className="application-intro">The application system is ready. Each route will open when the MUNAIR’27 calendar is finalized.</p></div>
-        <div className="application-list">{settings.applications.map((application, index) => {
-          const content = <><span>{String(index + 1).padStart(2, "0")}</span><strong>{application.title}</strong><small>{application.description}</small><b>{application.enabled ? "Apply" : "Preview"}<ArrowRight aria-hidden="true" /></b></>;
-          return application.enabled ? <Link key={application.id} href={`/apply/${application.id}`} className="application-route">{content}</Link> : <div key={application.id} className="application-route application-route--disabled">{content}</div>;
-        })}</div>
-      </div></section>}
+    {settings.sections.applications && <section id="applications" className="m-applications"><div className="site-container m-applications__grid">
+      <div className="m-applications__intro"><p className="m-label"><span>05</span> Applications</p><h2>Your place<br />at MUNAIR.</h2><p>Five ways to help shape the conference, from debate and procedure to media and operations.</p></div>
+      <div className="m-role-list">{settings.applications.map((application, index) => application.enabled ?
+        <Link href={`/apply/${application.id}`} className="m-role" key={application.id}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{application.title}</h3><p>{application.description}</p></div><ArrowUpRight aria-hidden="true" /></Link> :
+        <div className="m-role" key={application.id}><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{application.title}</h3><p>{application.description}</p></div></div>
+      )}</div>
+    </div></section>}
 
-      <section id="venue" className="venue-section"><div className="site-container venue-layout">
-        <div><p className="route-label">MNA / 06 — Destination</p><h2>Havajet Aviation<br />High School</h2></div>
-        <div className="venue-details"><p>Havajet Havacılık Lisesi<br />İzmir, Türkiye 35672</p><Link href={MAPS_URL} target="_blank" rel="noreferrer" className="map-link">Open location in Maps <ArrowUpRight aria-hidden="true" /></Link></div>
-      </div></section>
-    </>
-  );
+    <section id="venue" className="m-venue"><div className="site-container m-venue__grid">
+      <div><p className="m-label"><span>06</span> Venue</p><h2>Meet us<br />in İzmir.</h2></div>
+      <div className="m-venue__address"><MapPin aria-hidden="true" /><p>Havajet Havacılık Lisesi<br />İzmir, Türkiye 35672</p><Link href={MAPS_URL} target="_blank" rel="noreferrer">Open in Google Maps <ArrowUpRight aria-hidden="true" /></Link></div>
+    </div></section>
+  </>;
 }
