@@ -117,13 +117,14 @@ button, input, textarea, select { font: inherit; }
 
 .home-team { background: var(--paper); }
 .team-top h2 { letter-spacing: -.015em; line-height: 1; }
-.team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; margin-top: 3.5rem; }
-.team-card { display: block; color: var(--ink); }
+.team-grid { display: grid; grid-template-columns: 1fr; gap: .75rem; margin-top: 3.5rem; }
+.team-card { display: flex; height: 100%; flex-direction: column; color: var(--ink); }
 .team-card__image { position: relative; aspect-ratio: .9; overflow: hidden; background: var(--night); }
 .team-card__image img { object-fit: contain; padding: 1rem; mix-blend-mode: screen; }
 .team-card__image img { transition: transform .6s ease; }
 .team-card:hover .team-card__image img { transform: scale(1.04); }
-.team-card__meta { display: grid; grid-template-columns: 1.5rem 1fr auto; gap: .7rem; align-items: start; border-bottom: 1px solid var(--ink); padding: .8rem 0 1rem; }
+.team-card__meta { display: grid; min-height: 4.6rem; flex: 1; grid-template-columns: 1.5rem 1fr auto; gap: .7rem; align-items: start; border-bottom: 1px solid var(--ink); padding: .8rem 0 1rem; }
+.team-card__meta > div { min-width: 0; }
 .team-card__meta > span { color: var(--blue); font-size: .6rem; font-weight: 800; }
 .team-card h3 { margin: 0; font-family: var(--display-font); font-size: 1.45rem; font-weight: 400; letter-spacing: -.01em; line-height: 1.08; }
 .team-card p { margin: .35rem 0 0; color: var(--muted); font-size: .58rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
@@ -133,15 +134,16 @@ button, input, textarea, select { font: inherit; }
 .applications-top .section-label { color: var(--blue-light); }
 .applications-top .section-label span { color: white; }
 .applications-top > p { max-width: 27rem; margin: 1.6rem 0 0; color: rgb(255 255 255 / .6); font-size: .9rem; line-height: 1.7; }
-.session-countdown { display: grid; gap: 1.5rem; margin-top: 3rem; border-block: 1px solid rgb(255 255 255 / .16); padding-block: 1.1rem; }
+.session-countdown-band { background: var(--navy); color: white; }
+.session-countdown { display: grid; gap: 1.75rem; border-block: 1px solid rgb(255 255 255 / .2); padding-block: 1.5rem; }
 .session-countdown__intro { display: flex; flex-wrap: wrap; align-items: baseline; gap: .55rem 1rem; }
 .session-countdown__intro span, .session-countdown__intro p { color: rgb(255 255 255 / .48); font-size: .62rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
-.session-countdown__intro strong { color: var(--blue-light); font-size: .78rem; letter-spacing: .12em; }
+.session-countdown__intro strong { color: var(--blue-light); font-family: var(--display-font); font-size: clamp(1.35rem, 2.5vw, 2rem); font-weight: 400; letter-spacing: -.015em; line-height: 1; }
 .session-countdown__intro p { margin: 0 0 0 auto; }
 .session-countdown__units { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .session-countdown__unit { display: grid; gap: .3rem; border-left: 1px solid rgb(255 255 255 / .16); padding-inline: .8rem; }
 .session-countdown__unit:first-child { border-left: 0; padding-left: 0; }
-.session-countdown__unit strong { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 500; letter-spacing: -.06em; line-height: .9; }
+.session-countdown__unit strong { font-size: clamp(2.5rem, 5vw, 4.4rem); font-weight: 500; letter-spacing: -.045em; line-height: .9; }
 .session-countdown__unit span { color: rgb(255 255 255 / .45); font-size: .56rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
 .application-grid { display: grid; gap: .75rem; margin-top: 3.5rem; }
 .application-card { display: block; min-height: 9rem; color: white; }
@@ -181,7 +183,29 @@ button, input, textarea, select { font: inherit; }
 .footer-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 4rem; border-top: 1px solid rgb(255 255 255 / .12); padding-top: 1.25rem; color: rgb(255 255 255 / .42); font-size: .63rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .footer-base a { color: white; }
 
+@media (max-width: 639px) {
+  .home-hero__inner { min-height: calc(100svh - var(--nav-height)); padding-block: 1rem; }
+  .home-hero__eyebrow { gap: .35rem .8rem; font-size: .54rem; }
+  .home-hero__eyebrow span + span::before { margin-right: .8rem; }
+  .home-hero__content { align-content: center; padding-block: 3.5rem 6rem; }
+  .home-hero h1 { font-size: clamp(4rem, 18vw, 6.5rem); letter-spacing: -.055em; }
+  .home-hero__year { top: -1.1em; font-size: clamp(2rem, 10vw, 3.4rem); }
+  .home-hero__intro { max-width: 20rem; margin-top: 1.8rem; font-size: .92rem; line-height: 1.62; }
+  .home-hero__actions { gap: 1rem; margin-top: 1.7rem; }
+  .home-hero__image { right: -.5rem; bottom: 4.8rem; width: min(57vw, 14rem); opacity: .58; }
+  .home-hero__image span { margin-top: .45rem; font-size: .5rem; }
+  .home-hero__footer { display: grid; grid-template-columns: 1fr auto; gap: .7rem; font-size: .54rem; }
+  .home-hero__footer span:last-child { grid-column: 1 / -1; border-top: 1px solid rgb(255 255 255 / .12); padding-top: .65rem; }
+  .session-countdown { gap: 1.25rem; padding-block: 1.25rem; }
+  .session-countdown__intro { gap: .45rem .75rem; }
+  .session-countdown__intro p { width: 100%; margin-left: 0; }
+  .session-countdown__unit { padding-inline: .55rem; }
+  .session-countdown__unit strong { font-size: clamp(1.8rem, 9vw, 2.5rem); }
+  .session-countdown__unit span { font-size: .48rem; letter-spacing: .1em; }
+}
+
 @media (min-width: 640px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
   .application-grid { grid-template-columns: repeat(2, 1fr); }
   .application-card { grid-template-columns: 7rem 1fr; }
   .footer-routes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -201,7 +225,7 @@ button, input, textarea, select { font: inherit; }
   .application-page__form { padding: clamp(1.5rem, 3vw, 3rem); }
   .footer-main { grid-template-columns: minmax(0, 1.1fr) minmax(20rem, .9fr); gap: clamp(3rem, 8vw, 9rem); align-items: end; }
   .footer-routes { grid-template-columns: 1fr; }
-  .session-countdown { grid-template-columns: minmax(12rem, .7fr) 1.3fr; align-items: center; gap: 2rem; }
+  .session-countdown { grid-template-columns: minmax(15rem, .7fr) 1.3fr; align-items: center; gap: 2rem; }
 }
 @media (min-width: 1024px) {
   :root { --nav-height: 5rem; }

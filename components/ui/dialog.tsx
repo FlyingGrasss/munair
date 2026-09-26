@@ -32,7 +32,7 @@ export function DialogContent({ title, description, children, className, id, var
           id={id}
           className={cn(
             "relative w-full max-w-lg rounded-xl border border-[var(--border)] bg-[#f7f2ef] p-6 text-[var(--ink)] shadow-[0_24px_80px_rgba(0,0,0,.28)] outline-none transition data-ending-style:scale-[.98] data-ending-style:opacity-0 data-starting-style:scale-[.98] data-starting-style:opacity-0 motion-reduce:transition-none",
-            isDrawer && "h-[100dvh] w-[min(88vw,25rem)] max-w-none overflow-y-auto rounded-none border-y-0 border-r-0 border-l border-white/10 bg-[var(--charcoal)] p-6 text-white data-ending-style:translate-x-full data-ending-style:scale-100 data-starting-style:translate-x-full data-starting-style:scale-100 sm:h-[calc(100dvh-2rem)] sm:w-[min(25rem,calc(100vw-2rem))] sm:rounded-xl sm:border",
+            isDrawer && "h-[100dvh] w-[min(88vw,25rem)] max-w-none overflow-y-auto rounded-none border-y-0 border-r-0 border-l border-white/10 bg-[var(--charcoal)] p-5 text-white data-ending-style:translate-x-full data-ending-style:scale-100 data-starting-style:translate-x-full data-starting-style:scale-100 sm:h-[calc(100dvh-2rem)] sm:w-[min(25rem,calc(100vw-2rem))] sm:rounded-xl sm:border sm:p-6",
             className,
           )}
         >

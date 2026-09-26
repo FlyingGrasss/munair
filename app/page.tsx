@@ -53,6 +53,8 @@ export default async function Home() {
       </div>
     </section>
 
+    <SessionCountdown date={conference.startDateIso} />
+
     {settings.sections.about && <section id="about" className="home-introduction"><div className="site-container">
       <div className="introduction-top"><SectionLabel index="01">MUNAIR</SectionLabel><p>Model United Nations<br />of Aviation</p></div>
       <div className="introduction-grid"><FadeIn className="introduction-image" direction="none"><Image src="/munair_logo.jpg" alt="MUNAIR globe and wings emblem" fill sizes="(max-width: 767px) 100vw, 55vw" className="logo-placeholder" /></FadeIn><FadeIn className="introduction-copy" delay={100}><h2>A room for<br /><em>better questions.</em></h2><p>MUNAIR’27 is built around research, respectful disagreement, and the confidence to speak when the answer is not obvious.</p><Link href="#letters">Read the welcome letter <ArrowUpRight aria-hidden="true" /></Link></FadeIn></div>
@@ -75,7 +77,6 @@ export default async function Home() {
 
     {settings.sections.applications && <section id="applications" className="home-applications"><div className="site-container">
       <div className="applications-top"><SectionLabel index="05">Applications</SectionLabel><h2>There is a place<br />for you here.</h2><p>Choose the role that fits the way you want to contribute. All applications are open.</p></div>
-      <SessionCountdown date={conference.startDateIso} />
       <div className="application-grid">{settings.applications.map((application, index) => { const Icon = applicationIcons[application.id]; return <Link key={application.id} href={`/apply/${application.id}`} className="application-card"><div className="application-card__copy"><span>{String(index + 1).padStart(2, "0")}</span><Icon aria-hidden="true" className="application-card__icon" /><div><h3>{application.title}</h3><p>{application.description}</p></div><ArrowUpRight aria-hidden="true" /></div></Link>; })}</div>
     </div></section>}
 
