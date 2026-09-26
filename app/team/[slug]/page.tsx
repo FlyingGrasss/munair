@@ -37,7 +37,7 @@ export default async function TeamPage({ params }: { params: Promise<{ slug: str
         <FadeIn delay={220} className="self-center">
           <div>
             <p className="eyebrow text-[var(--red)]">{item.role}</p>
-            <h1 className="mt-4 font-display text-6xl leading-none sm:text-8xl">{item.name}</h1>
+            <h1 className="mt-4 font-display text-6xl leading-[.98] tracking-[-.02em] sm:text-8xl">{item.name}</h1>
             <p className="mt-9 max-w-2xl whitespace-pre-line text-lg leading-8 text-[var(--muted)]">{item.bio}</p>
             {item.instagram && (
               <Link href={item.instagram} target="_blank" rel="noreferrer" className="mt-8 inline-flex items-center gap-2 font-bold hover:text-[var(--red)]">

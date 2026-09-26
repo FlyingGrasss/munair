@@ -31,7 +31,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
           <FadeIn delay={120}>
             <div>
               <p className="eyebrow text-[var(--blue)]">MUNAIR’27 committee</p>
-              <h1 className="mt-5 font-display text-6xl leading-none sm:text-8xl">{item.name}</h1>
+              <h1 className="mt-5 font-display text-6xl leading-[.98] tracking-[-.02em] sm:text-8xl">{item.name}</h1>
               <p className="mt-10 max-w-3xl whitespace-pre-line text-lg leading-8 text-white/72">{item.description}</p>
               {item.documents.length > 0 && (
                 <div className="mt-12 border-t border-white/15 pt-7">

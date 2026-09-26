@@ -36,7 +36,7 @@ export function DialogContent({ title, description, children, className, id, var
             className,
           )}
         >
-          <Dialog.Title className="pr-10 font-display text-3xl leading-none">{title}</Dialog.Title>
+      <Dialog.Title className="pr-10 font-display text-3xl leading-[.98] tracking-[-.02em]">{title}</Dialog.Title>
           {description ? <Dialog.Description className={cn("mt-3 text-sm leading-6", isDrawer ? "text-white/60" : "text-[var(--muted)]")}>{description}</Dialog.Description> : null}
           <Dialog.Close aria-label="Close dialog" className={cn(
             "absolute right-4 top-4 grid size-10 place-items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--red)]",
