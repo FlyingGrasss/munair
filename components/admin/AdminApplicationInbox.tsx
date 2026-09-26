@@ -31,8 +31,9 @@ function sheetMessage(status: string) {
   return "Sent, but the Sheets row could not be highlighted.";
 }
 
-function EmailComposer({ application }: { application: ApplicationRow }) {
-  const name = applicantName(application.payload);
+function EmailComposer({ application }: { application?: ApplicationRow }) {
+  const name = application ? applicantName(application.payload) : "there";
+  const [recipientEmail, setRecipientEmail] = useState(application?.email || "");
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState(`Hello ${name},\n\n\nBest,\nMUNAIR Team`);
   const [state, setState] = useState<SendState>({ kind: "idle" });
@@ -46,10 +47,10 @@ function EmailComposer({ application }: { application: ApplicationRow }) {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           idempotencyKey: crypto.randomUUID().replaceAll("-", ""),
-          recipientEmail: application.email,
+          recipientEmail,
           subject,
           body,
-          applicationSubmissionId: application.id,
+          applicationSubmissionId: application?.id,
         }),
       });
       const result = await response.json() as { ok?: boolean; sheetSyncStatus?: string; error?: { message?: string } };
@@ -68,7 +69,7 @@ function EmailComposer({ application }: { application: ApplicationRow }) {
   return <details className="mt-4 rounded-lg border border-white/10 bg-black/20 p-4">
     <summary className="cursor-pointer text-sm font-bold text-[var(--color-accent)]">Send an email</summary>
     <form onSubmit={submit} className="mt-4 grid gap-3">
-      <label className="grid gap-1 text-xs font-bold uppercase tracking-[0.12em] text-white/60">To<input value={application.email} readOnly className="rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-sm normal-case tracking-normal text-white" /></label>
+      <label className="grid gap-1 text-xs font-bold uppercase tracking-[0.12em] text-white/60">To<input type="email" value={recipientEmail} onChange={(event) => setRecipientEmail(event.target.value)} readOnly={Boolean(application)} required className="rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-sm normal-case tracking-normal text-white" /></label>
       <label className="grid gap-1 text-xs font-bold uppercase tracking-[0.12em] text-white/60">Subject<input value={subject} onChange={(event) => setSubject(event.target.value)} required maxLength={180} className="rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-sm normal-case tracking-normal text-white" /></label>
       <label className="grid gap-1 text-xs font-bold uppercase tracking-[0.12em] text-white/60">Message<textarea value={body} onChange={(event) => setBody(event.target.value)} required maxLength={20_000} rows={7} className="rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-sm normal-case tracking-normal text-white" /></label>
       <button type="submit" disabled={state.kind === "sending"} className="w-fit rounded-lg bg-[var(--color-accent)] px-4 py-2 text-sm font-bold text-white transition hover:bg-white hover:text-black disabled:opacity-55">{state.kind === "sending" ? "Sending…" : "Send email"}</button>
@@ -87,6 +88,10 @@ export default function AdminApplicationInbox({ applications }: { applications: 
       </div>
       <span className="text-sm font-bold text-[var(--color-accent)]">{applications.length} recent</span>
     </div>
+    <details className="mt-6 rounded-lg border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/5 p-4">
+      <summary className="cursor-pointer text-sm font-bold text-[var(--color-accent)]">Compose an email to any recipient</summary>
+      <div className="mt-4"><EmailComposer /></div>
+    </details>
     <div className="mt-6 grid gap-3">
       {applications.map((application) => <article key={application.id} className="rounded-lg border border-white/10 bg-white/5 p-4">
         <div className="flex flex-wrap items-start justify-between gap-3">
