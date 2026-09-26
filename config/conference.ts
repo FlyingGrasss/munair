@@ -68,7 +68,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     fullName: "Model United Nations of Aviation",
     sessionName: "Third Official Session of MUNAIR",
     dates: "2027",
-    startDateIso: "",
+    startDateIso: "2027-01-01T09:00:00+03:00",
     endDateIso: "",
     year: 2027,
     hashtag: "#wingsofdiplomacy",

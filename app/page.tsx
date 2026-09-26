@@ -4,6 +4,7 @@ import { ArrowUpRight, Building2, Camera, Gavel, Landmark, MapPin, UsersRound } 
 import type { LucideIcon } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import ScrollToSectionLink from "@/components/ScrollToSectionLink";
+import SessionCountdown from "@/components/SessionCountdown";
 import StructuredData from "@/components/StructuredData";
 import { formatConferenceText } from "@/config/conference";
 import { getPublicContent } from "@/lib/site-settings";
@@ -74,6 +75,7 @@ export default async function Home() {
 
     {settings.sections.applications && <section id="applications" className="home-applications"><div className="site-container">
       <div className="applications-top"><SectionLabel index="05">Applications</SectionLabel><h2>There is a place<br />for you here.</h2><p>Choose the role that fits the way you want to contribute. All applications are open.</p></div>
+      <SessionCountdown date={conference.startDateIso} />
       <div className="application-grid">{settings.applications.map((application, index) => { const Icon = applicationIcons[application.id]; return <Link key={application.id} href={`/apply/${application.id}`} className="application-card"><div className="application-card__copy"><span>{String(index + 1).padStart(2, "0")}</span><Icon aria-hidden="true" className="application-card__icon" /><div><h3>{application.title}</h3><p>{application.description}</p></div><ArrowUpRight aria-hidden="true" /></div></Link>; })}</div>
     </div></section>}
 
