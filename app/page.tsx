@@ -72,7 +72,7 @@ export default async function Home() {
 
     {settings.sections.team && <section id="team" className="home-team"><div className="site-container">
       <div className="team-top"><SectionLabel index="04">Secretariat</SectionLabel><h2>The people<br />behind the room.</h2></div>
-      <div className="team-grid">{team.map((member, index) => <FadeIn key={member.id} delay={index * 60}><Link href={`/team/${member.slug}`} className="team-card"><div className="team-card__image"><Image src="/munair_logo.jpg" alt="MUNAIR globe and wings emblem" fill sizes="(max-width: 767px) 50vw, 25vw" className="logo-placeholder" /></div><div className="team-card__meta"><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{member.name}</h3><p>{member.role}</p></div><ArrowUpRight aria-hidden="true" /></div></Link></FadeIn>)}</div>
+      <div className="team-grid">{team.map((member, index) => <FadeIn key={member.id} delay={index * 60}><Link href={`/team/${member.slug}`} className="team-card"><div className="team-card__image"><Image src={member.imageUrl || "/munair_logo.jpg"} alt="" fill unoptimized sizes="(max-width: 767px) 50vw, 25vw" className={member.imageUrl ? "team-photo" : "logo-placeholder"} /></div><div className="team-card__meta"><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{member.name}</h3><p>{member.role}</p></div><ArrowUpRight aria-hidden="true" /></div></Link></FadeIn>)}</div>
     </div></section>}
 
     {settings.sections.applications && <section id="applications" className="home-applications"><div className="site-container">
