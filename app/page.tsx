@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Building2, Camera, Gavel, Landmark, MapPin, MapPinned, UsersRound } from "lucide-react";
+import { ArrowUpRight, Building2, Camera, Gavel, Landmark, MapPin, UsersRound } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import ScrollToSectionLink from "@/components/ScrollToSectionLink";
@@ -80,6 +80,6 @@ export default async function Home() {
       <div className="application-grid">{settings.applications.map((application, index) => { const Icon = applicationIcons[application.id]; return <Link key={application.id} href={`/apply/${application.id}`} className="application-card"><div className="application-card__copy"><span>{String(index + 1).padStart(2, "0")}</span><Icon aria-hidden="true" className="application-card__icon" /><div><h3>{application.title}</h3><p>{application.description}</p></div><ArrowUpRight aria-hidden="true" /></div></Link>; })}</div>
     </div></section>}
 
-    <section id="venue" className="home-venue"><div className="site-container venue-grid"><div><SectionLabel index="06">Venue</SectionLabel><h2>See you<br />in İzmir.</h2></div><div className="venue-card"><MapPin aria-hidden="true" /><p>Havajet Havacılık Lisesi<br />İzmir, Türkiye 35672</p><Link href={MAPS_URL} target="_blank" rel="noreferrer">Open in Google Maps <MapPinned aria-hidden="true" className="google-maps-icon" /><ArrowUpRight aria-hidden="true" /></Link></div></div></section>
+    <section id="venue" className="home-venue"><div className="site-container venue-grid"><div><SectionLabel index="06">Venue</SectionLabel><h2>See you<br />in İzmir.</h2></div><div className="venue-card"><MapPin aria-hidden="true" /><p>Havajet Havacılık Lisesi<br />İzmir, Türkiye 35672</p><Link href={MAPS_URL} target="_blank" rel="noreferrer">Open in Google Maps <Image src="/google-maps-icon.png" alt="" width={20} height={20} className="google-maps-icon" /><ArrowUpRight aria-hidden="true" /></Link></div></div></section>
   </>;
 }

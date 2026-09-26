@@ -29,7 +29,6 @@ export default async function ApplicationPage({ params, searchParams }: { params
         <p className="eyebrow">MUNAIR’27 / Application</p>
         <h1>{application.formTitle}</h1>
         <p className="application-page__description">{application.description}</p>
-        <div className="application-page__note"><span>01</span><p>Email verification is required before an application is submitted.</p></div>
       </aside>
       <section className="application-page__form" aria-label={application.formTitle}><ApplicationForm application={application} settings={settings} /></section>
     </div>
