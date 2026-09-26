@@ -134,7 +134,7 @@ button, input, textarea, select { font: inherit; }
 .applications-top .section-label span { color: white; }
 .applications-top > p { max-width: 27rem; margin: 1.6rem 0 0; color: rgb(255 255 255 / .6); font-size: .9rem; line-height: 1.7; }
 .session-countdown-band { background: var(--paper); color: var(--ink); }
-.session-countdown { display: grid; gap: 1.75rem; border-block: 1px solid var(--border); padding-block: 2rem; }
+.session-countdown { display: grid; gap: 1.75rem; border-block: 1px solid var(--border); padding-block: 3rem; }
 .session-countdown__intro { display: flex; flex-wrap: wrap; align-items: baseline; gap: .55rem 1rem; }
 .session-countdown__intro span, .session-countdown__intro p { color: var(--muted); font-size: .62rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .session-countdown__intro strong { color: var(--blue-dark); font-family: var(--display-font); font-size: clamp(1.35rem, 2.5vw, 2rem); font-weight: 400; letter-spacing: -.015em; line-height: 1; }
@@ -199,7 +199,7 @@ button, input, textarea, select { font: inherit; }
   .home-hero__footer { display: grid; grid-template-columns: 1fr auto; gap: .7rem; font-size: .54rem; }
   .home-hero__footer span:last-child { grid-column: 1 / -1; border-top: 1px solid rgb(255 255 255 / .12); padding-top: .65rem; }
   .session-countdown-band { background: var(--paper); }
-  .session-countdown { gap: 1.25rem; padding-block: 1.7rem; }
+  .session-countdown { gap: 1.25rem; padding-block: 2.25rem; }
   .session-countdown__unit { padding-inline: .55rem; }
   .session-countdown__unit strong { font-size: clamp(2.15rem, 11vw, 3rem); }
   .session-countdown__unit span { font-size: .48rem; letter-spacing: .1em; }
