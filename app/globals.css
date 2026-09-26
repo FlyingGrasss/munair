@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+:root {
+  --nav-height: 4rem;
+  --navy: #121d2f;
+  --night: #030406;
+  --blue: #156bc9;
+  --blue-dark: #0e459a;
+  --blue-light: #8ab7da;
+  --mist: #9cbdd9;
+  --ice: #eef5fa;
+  --paper: #f7fafc;
+  --ink: #111a27;
+  --muted: #58697a;
+  --border: #bfd0de;
+  --focus: #156bc9;
+  --background: var(--navy);
+  --color-accent: var(--blue);
+  --red: var(--blue);
+  --charcoal: var(--navy);
+  --brown: var(--blue-dark);
+  --buffalo: var(--mist);
+}
+@theme inline { --font-sans: var(--font-manrope); --font-display: var(--font-instrument); }
+* { box-sizing: border-box; }
+html { scroll-padding-top: var(--nav-height); }
+body { margin: 0; font-family: var(--font-manrope), sans-serif; background: var(--paper); color: var(--ink); }
+::selection { background: var(--blue); color: white; }
+a { text-underline-offset: .22em; }
+button, input, textarea, select { font: inherit; }
+.font-display { font-family: var(--font-instrument), serif; }
+.site-container { width: min(100% - 2rem, 76rem); margin-inline: auto; }
+.section-shell { padding-block: clamp(5rem, 10vw, 9rem); }
+.eyebrow { font-size: .7rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+.link-underline { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); text-decoration-thickness: 1px; }
+.link-underline:hover { text-decoration-color: currentColor; }
+.skip-link { position: fixed; z-index: 100; left: 1rem; top: -6rem; background: white; color: black; padding: .75rem 1rem; }
+.skip-link:focus { top: 1rem; }
+.hero-field { background: linear-gradient(145deg, var(--navy) 0%, #0b1422 52%, var(--night) 100%); }
+.flight-lines { background-image: repeating-linear-gradient(165deg, transparent 0 72px, rgb(138 183 218 / .09) 73px, transparent 74px 146px); }
+.logo-frame::after { content: ""; position: absolute; inset: 0; border: 1px solid rgb(138 183 218 / .18); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+@media (min-width: 1024px) { :root { --nav-height: 5rem; } }

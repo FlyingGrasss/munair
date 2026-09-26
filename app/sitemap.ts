@@ -1,0 +1,3 @@
+import type { MetadataRoute } from "next";
+import { getPublicContent, publicSiteUrl } from "@/lib/site-settings";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> { const { settings, committees, team } = await getPublicContent(); const base = publicSiteUrl(settings); return [{ url: base }, ...settings.applications.filter((item) => item.enabled).map((item) => ({ url: `${base}/apply/${item.id}` })), ...committees.map((item) => ({ url: `${base}/committees/${item.slug}`, lastModified: new Date(item.updatedAt) })), ...team.map((item) => ({ url: `${base}/team/${item.slug}`, lastModified: new Date(item.updatedAt) }))]; }

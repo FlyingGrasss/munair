@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model ConferenceSettings {
+  id        Int      @id @default(1)
+  data      Json
+  version   Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AdminSession {
+  id        String    @id @default(cuid())
+  tokenHash String    @unique
+  version   String
+  expiresAt DateTime
+  lastSeenAt DateTime @default(now())
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([expiresAt])
+  @@index([revokedAt])
+}
+
+model Committee {
+  id          Int      @id @default(autoincrement())
+  sortOrder   Int      @default(0)
+  name        String
+  slug        String   @unique
+  imageUrl    String?
+  description String   @db.Text
+  documents   Json?
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TeamMember {
+  id          Int      @id @default(autoincrement())
+  sortOrder   Int      @default(0)
+  name        String
+  slug        String   @unique
+  role        String
+  imageUrl    String?
+  bio         String   @db.Text
+  instagram   String?
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model VerificationChallenge {
+  id              String   @id @default(cuid())
+  email           String
+  applicationType String
+  codeHash        String
+  payloadHash     String
+  ipHash          String
+  attempts        Int      @default(0)
+  expiresAt       DateTime
+  lastSentAt      DateTime @default(now())
+  createdAt       DateTime @default(now())
+
+  @@unique([email, applicationType])
+  @@index([ipHash, createdAt])
+  @@index([expiresAt])
+}
+
+model SubmissionClaim {
+  id              String           @id @default(cuid())
+  email           String
+  applicationType String
+  status          SubmissionStatus @default(PROCESSING)
+  attempts        Int              @default(1)
+  lastErrorCode   String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  completedAt     DateTime?
+
+  @@unique([email, applicationType])
+  @@index([status, updatedAt])
+}
+
+model ApplicationSubmission {
+  id              String   @id @default(cuid())
+  email           String
+  applicationType String
+  payload         Json
+  claimId         String   @unique
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([email])
+  @@index([applicationType])
+  @@index([createdAt])
+}
+
+enum SubmissionStatus {
+  PROCESSING
+  FAILED
+  COMPLETED
+}
