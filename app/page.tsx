@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Building2, Camera, Gavel, Landmark, MapPin, UsersRound } from "lucide-react";
+import { ArrowUpRight, Building2, Camera, Gavel, Landmark, UsersRound } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import ScrollToSectionLink from "@/components/ScrollToSectionLink";
@@ -37,7 +37,7 @@ export default async function Home() {
         <div className="home-hero__content">
           <FadeIn className="home-hero__copy" delay={80} direction="none">
             <p className="home-hero__overline">{conference.hashtag}</p>
-            <div className="home-hero__wordmark"><h1>MUNAIR</h1><span className="home-hero__year">’27</span></div>
+            <div className="home-hero__wordmark"><h1>MUNAIR</h1><span className="home-hero__year">&rsquo;27</span></div>
             <p className="home-hero__intro">A student-led conference for people who want to understand the world, challenge assumptions, and make the room move.</p>
             <div className="home-hero__actions">
               <ScrollToSectionLink sectionId="applications" className="hero-cta">Apply <ArrowUpRight aria-hidden="true" /></ScrollToSectionLink>
@@ -80,6 +80,6 @@ export default async function Home() {
       <div className="application-grid">{settings.applications.map((application, index) => { const Icon = applicationIcons[application.id]; return <Link key={application.id} href={`/apply/${application.id}`} className="application-card"><div className="application-card__copy"><span>{String(index + 1).padStart(2, "0")}</span><Icon aria-hidden="true" className="application-card__icon" /><div><h3>{application.title}</h3><p>{application.description}</p></div><ArrowUpRight aria-hidden="true" /></div></Link>; })}</div>
     </div></section>}
 
-    <section id="venue" className="home-venue"><div className="site-container venue-grid"><div><SectionLabel index="06">Venue</SectionLabel><h2>See you<br />in İzmir.</h2></div><div className="venue-card"><MapPin aria-hidden="true" /><p>Havajet Havacılık Lisesi<br />İzmir, Türkiye 35672</p><Link href={MAPS_URL} target="_blank" rel="noreferrer">Open in Google Maps <Image src="/google-maps-icon.png" alt="" width={20} height={20} className="google-maps-icon" /><ArrowUpRight aria-hidden="true" /></Link></div></div></section>
+    <section id="venue" className="home-venue"><div className="site-container venue-grid"><div><SectionLabel index="06">Venue</SectionLabel><h2>See you<br />in İzmir.</h2></div><div className="venue-card"><p>Havajet Havacılık Lisesi<br />İzmir, Türkiye 35672</p><Link href={MAPS_URL} target="_blank" rel="noreferrer"><span>Open in Google Maps</span><Image src="/google-maps-icon.png" alt="" width={20} height={20} className="google-maps-icon" /><ArrowUpRight aria-hidden="true" /></Link></div></div></section>
   </>;
 }

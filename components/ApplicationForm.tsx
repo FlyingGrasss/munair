@@ -81,8 +81,6 @@ export default function ApplicationForm({ application, settings }: { application
       {message && <p role="alert" className="border-l-4 border-[var(--red)] bg-red-50 p-4 text-sm font-semibold text-red-800">{message}</p>}
       <div className="border-t border-[var(--border)] pt-6"><Button type="submit" disabled={busy}>{busy ? "Checking application…" : "Continue to email verification"}</Button></div>
     </form>
-    <p className="mt-5 border-t border-[var(--border)] pt-4 text-xs leading-5 text-[var(--muted)]">Email verification is required before an application is submitted.</p>
-
     <DialogRoot open={dialogOpen} onOpenChange={setDialogOpen}><DialogContent title="Verify your email" description="Enter the six-digit code we sent. It expires in 10 minutes.">
       <form onSubmit={verify} className="space-y-5"><FieldShell id="verification-code" label="Verification code" required error={message || undefined}><Input id="verification-code" value={code} onChange={(event) => setCode(event.target.value.replace(/\D/g, "").slice(0, 6))} inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" maxLength={6} className="text-center text-2xl font-extrabold tracking-[.4em]" aria-invalid={Boolean(message)} /></FieldShell><Button type="submit" disabled={busy || code.length !== 6}>{busy ? "Submitting…" : "Verify and submit"}</Button></form>
     </DialogContent></DialogRoot>

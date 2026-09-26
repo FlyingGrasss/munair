@@ -22,15 +22,23 @@ export default async function ApplicationPage({ params, searchParams }: { params
   const { settings } = await getPublicContent();
   const application = settings.applications.find((item) => item.id === type && (item.enabled || preview));
   if (!application) notFound();
-  return <div className="application-page"><div className="site-container application-page__shell">
+  return <main className="application-page"><div className="site-container application-page__shell">
     <div className="application-page__top"><Link href="/#applications"><ArrowLeft aria-hidden="true" /> Back to applications</Link><span>{application.title}</span></div>
-    <div className="application-page__grid">
-      <aside className="application-page__intro">
-        <p className="eyebrow">MUNAIR’27 / Application</p>
+    <div className="application-page__hero">
+      <div className="application-page__intro">
+        <p className="eyebrow">MUNAIR&rsquo;27 / Application</p>
         <h1>{application.formTitle}</h1>
         <p className="application-page__description">{application.description}</p>
+      </div>
+      <aside className="application-page__route" aria-label="Application route">
+        <span>Application route</span>
+        <strong>{application.title}</strong>
+        <p>Complete the details below. Your application is reviewed by the MUNAIR team.</p>
       </aside>
-      <section className="application-page__form" aria-label={application.formTitle}><ApplicationForm application={application} settings={settings} /></section>
     </div>
-  </div></div>;
+    <section className="application-page__form" aria-label={application.formTitle}>
+      <div className="application-page__form-heading"><span>Application details</span><p>Tell us how you would contribute to the session.</p></div>
+      <ApplicationForm application={application} settings={settings} />
+    </section>
+  </div></main>;
 }
