@@ -194,13 +194,6 @@ export default async function AdminPage() {
             </p>
           </div>
           <AdminSettingsForm settings={settings} action={saveConferenceSettingsAction} />
-          <div className="flex flex-wrap gap-3">
-            {settings.applications.map((application) => (
-              <Link key={application.id} href={`/apply/${application.id}?preview=1`} className="rounded-lg border border-white/20 px-3 py-2 text-sm font-semibold hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]">
-                Preview {application.title}
-              </Link>
-            ))}
-          </div>
         </section>
       </div>
     </main>

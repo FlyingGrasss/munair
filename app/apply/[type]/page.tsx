@@ -22,11 +22,16 @@ export default async function ApplicationPage({ params, searchParams }: { params
   const { settings } = await getPublicContent();
   const application = settings.applications.find((item) => item.id === type && (item.enabled || preview));
   if (!application) notFound();
-  return <div className="bg-[var(--paper)]"><div className="site-container py-12 sm:py-20">
-    <Link href="/#applications" className="inline-flex items-center gap-2 text-sm font-bold text-[var(--brown)] hover:text-[var(--red)]"><ArrowLeft className="size-4" /> All applications</Link>
-    <div className="mt-10 grid gap-10 lg:grid-cols-[19rem_1fr]">
-      <aside><p className="eyebrow text-[var(--blue)]">MUNAIR’27 {preview ? "preview" : ""}</p><h1 className="mt-4 font-display text-5xl leading-none">{application.formTitle}</h1><p className="mt-6 text-sm leading-6 text-[var(--muted)]">{application.description}</p></aside>
-      <div className="rounded-xl border border-[var(--border)] bg-[#fbf8f5] p-5 sm:p-8"><ApplicationForm application={application} settings={settings} /></div>
+  return <div className="application-page"><div className="site-container application-page__shell">
+    <div className="application-page__top"><Link href="/#applications"><ArrowLeft aria-hidden="true" /> Back to applications</Link><span>{application.title}</span></div>
+    <div className="application-page__grid">
+      <aside className="application-page__intro">
+        <p className="eyebrow">MUNAIR’27 / Application</p>
+        <h1>{application.formTitle}</h1>
+        <p className="application-page__description">{application.description}</p>
+        <div className="application-page__note"><span>01</span><p>Email verification is required before an application is submitted.</p></div>
+      </aside>
+      <section className="application-page__form" aria-label={application.formTitle}><ApplicationForm application={application} settings={settings} /></section>
     </div>
   </div></div>;
 }
