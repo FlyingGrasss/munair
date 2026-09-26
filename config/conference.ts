@@ -82,11 +82,11 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   },
   sections: { about: true, letters: true, committees: true, team: true, applications: true, contact: true },
   applications: [
-    { id: "delegate", enabled: false, title: "Delegate", formTitle: "Delegate Application", description: "Represent a nation, research global issues, and turn debate into practical diplomacy." },
-    { id: "chair", enabled: false, title: "Chairboard", formTitle: "Chairboard Application", description: "Guide procedure, protect productive debate, and help every delegate contribute." },
-    { id: "delegation", enabled: false, title: "Delegation", formTitle: "Delegation Application", description: "Bring your school or organization to MUNAIR as one coordinated delegation." },
-    { id: "press", enabled: false, title: "Press", formTitle: "Press Application", description: "Document the conference through reporting, photography, and visual storytelling." },
-    { id: "admin", enabled: false, title: "Admin", formTitle: "Admin Application", description: "Keep the conference moving through communication, logistics, and participant support." },
+    { id: "delegate", enabled: true, title: "Delegate", formTitle: "Delegate Application", description: "Represent a nation, research global issues, and turn debate into practical diplomacy.", imageUrl: "/applications/delegate.webp" },
+    { id: "chair", enabled: true, title: "Chairboard", formTitle: "Chairboard Application", description: "Guide procedure, protect productive debate, and help every delegate contribute.", imageUrl: "/applications/chair.jpg" },
+    { id: "delegation", enabled: true, title: "Delegation", formTitle: "Delegation Application", description: "Bring your school or organization to MUNAIR as one coordinated delegation.", imageUrl: "/applications/delegation.webp" },
+    { id: "press", enabled: true, title: "Press", formTitle: "Press Application", description: "Document the conference through reporting, photography, and visual storytelling.", imageUrl: "/applications/press.webp" },
+    { id: "admin", enabled: true, title: "Admin", formTitle: "Admin Application", description: "Keep the conference moving through communication, logistics, and participant support.", imageUrl: "/applications/admin.webp" },
   ],
   form: { minimumDelegates: 4, committeePreferenceCount: 3, questions },
   letters: [{
@@ -95,7 +95,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
       "It is my pleasure to welcome you to {shortName}, the third official session of Model United Nations of Aviation. At Havajet Aviation High School, delegates will meet across borders and perspectives to turn careful research into purposeful debate.",
       "Our team is building a conference where first-time and experienced delegates can speak with confidence, negotiate with respect, and leave each room with a wider view of the world. We look forward to welcoming you to İzmir.",
     ],
-    author: "Name Surname — Secretary-General",
+    author: "Rüzgar Efe Taşın — Secretary-General",
   }],
 };
 
@@ -111,10 +111,10 @@ export const DEFAULT_COMMITTEES: PublicCommittee[] = [
 ];
 
 export const DEFAULT_TEAM: PublicTeamMember[] = [
-  { id: -1, name: "Name Surname", slug: "secretary-general", role: "Secretary-General", imageUrl: null, bio: "Leads the conference vision and represents the MUNAIR secretariat.", instagram: null, updatedAt: defaultUpdatedAt },
-  { id: -2, name: "Name Surname", slug: "director-general", role: "Director-General", imageUrl: null, bio: "Coordinates the organization team and the conference’s operational plan.", instagram: null, updatedAt: defaultUpdatedAt },
-  { id: -3, name: "Name Surname", slug: "head-of-academics", role: "Head of Academics", imageUrl: null, bio: "Guides committee preparation, academic standards, and chairboard coordination.", instagram: null, updatedAt: defaultUpdatedAt },
-  { id: -4, name: "Name Surname", slug: "head-of-organization", role: "Head of Organization", imageUrl: null, bio: "Oversees participant experience, logistics, and on-site coordination.", instagram: null, updatedAt: defaultUpdatedAt },
+  { id: -1, name: "Rüzgar Efe Taşın", slug: "secretary-general", role: "Secretary-General", imageUrl: "/applications/chair.jpg", bio: "Leads the conference vision and represents the MUNAIR secretariat.", instagram: null, updatedAt: defaultUpdatedAt },
+  { id: -2, name: "MUNAIR Academic Team", slug: "academic-team", role: "Academic Team", imageUrl: "/applications/delegate.webp", bio: "Guides committee preparation, academic standards, and chairboard coordination.", instagram: null, updatedAt: defaultUpdatedAt },
+  { id: -3, name: "MUNAIR Organization Team", slug: "organization-team", role: "Organization Team", imageUrl: "/applications/delegation.webp", bio: "Coordinates the organization team and the conference’s operational plan.", instagram: null, updatedAt: defaultUpdatedAt },
+  { id: -4, name: "MUNAIR Press Team", slug: "press-team", role: "Press Team", imageUrl: "/applications/press.webp", bio: "Documents the conference through reporting, photography, and visual storytelling.", instagram: null, updatedAt: defaultUpdatedAt },
 ];
 
 export const APPLICATION_TYPES = DEFAULT_SETTINGS.applications.map((item) => item.id);

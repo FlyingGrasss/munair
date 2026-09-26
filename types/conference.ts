@@ -26,6 +26,7 @@ export type ApplicationDefinition = {
   title: string;
   formTitle: string;
   description: string;
+  imageUrl?: string;
 };
 
 export type LetterDefinition = {
