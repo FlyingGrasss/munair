@@ -44,10 +44,10 @@ export default async function Home() {
               <ScrollToSectionLink sectionId="committees" className="hero-link">See the committees</ScrollToSectionLink>
             </div>
           </FadeIn>
-          <FadeIn className="home-hero__image" delay={180} direction="left">
+          <div className="home-hero__image">
             <Image src="/munair_logo_transparent.png" alt="MUNAIR globe and wings emblem" width={1080} height={1080} priority />
             <span>Wings of diplomacy</span>
-          </FadeIn>
+          </div>
         </div>
         <div className="home-hero__footer"><span>Havajet Aviation High School</span><span>{conference.dates}</span><span>Follow {conference.instagramHandle}</span></div>
       </div>
