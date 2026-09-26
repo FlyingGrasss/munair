@@ -38,12 +38,12 @@ export default async function Home() {
             <div className="home-hero__wordmark"><h1>MUNAIR</h1><span className="home-hero__year">’27</span></div>
             <p className="home-hero__intro">A student-led conference for people who want to understand the world, challenge assumptions, and make the room move.</p>
             <div className="home-hero__actions">
-              <Link href="/apply/delegate" className="hero-cta">Apply <ArrowUpRight aria-hidden="true" /></Link>
+              <Link href="#applications" className="hero-cta">Apply <ArrowUpRight aria-hidden="true" /></Link>
               <Link href="#committees" className="hero-link">See the committees</Link>
             </div>
           </FadeIn>
           <FadeIn className="home-hero__image" delay={180} direction="left">
-            <Image src="/munair_logo.jpg" alt="MUNAIR globe and wings emblem" width={1080} height={1080} priority />
+            <Image src="/munair_logo_transparent.png" alt="MUNAIR globe and wings emblem" width={1080} height={1080} priority />
             <span>Wings of diplomacy</span>
           </FadeIn>
         </div>
