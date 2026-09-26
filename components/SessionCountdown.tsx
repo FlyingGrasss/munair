@@ -38,7 +38,6 @@ export default function SessionCountdown({ date }: { date: string }) {
 
   return <section className="session-countdown-band" aria-label="Countdown to MUNAIR 27">
     <div className="site-container"><div className="session-countdown">
-      <div className="session-countdown__intro"><span>Flight plan</span><strong>Countdown to MUNAIR’27</strong><p>Make your move.</p></div>
       <div className="session-countdown__units">{units.map((unit) => <div key={unit} className="session-countdown__unit"><strong>{mounted ? String(time[unit]).padStart(2, "0") : "00"}</strong><span>{unit}</span></div>)}</div>
     </div></div>
   </section>;
