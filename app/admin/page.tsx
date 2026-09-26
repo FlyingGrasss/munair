@@ -2,6 +2,7 @@ export const instant = false;
 import Link from "next/link";
 import { logoutAction, revokeAllSessionsAction, createCommitteeAction, createTeamMemberAction, saveConferenceSettingsAction } from "@/app/admin/actions";
 import AdminSettingsForm from "@/components/admin/AdminSettingsForm";
+import AdminApplicationInbox from "@/components/admin/AdminApplicationInbox";
 import ImageUrlField from "@/components/admin/ImageUrlField";
 import NameAndSlugFields from "@/components/admin/NameAndSlugFields";
 import { DEFAULT_SETTINGS } from "@/config/conference";
@@ -65,10 +66,11 @@ function Textarea({
 export default async function AdminPage() {
   await requireAdmin();
 
-  const [committees, team, publicContent] = await Promise.all([
+  const [committees, team, publicContent, applications] = await Promise.all([
     prisma.committee.findMany({ orderBy: [{ sortOrder: "asc" }, { id: "asc" }] }),
     prisma.teamMember.findMany({ orderBy: [{ sortOrder: "asc" }, { id: "asc" }] }),
     getPublicContent(),
+    prisma.applicationSubmission.findMany({ orderBy: { createdAt: "desc" }, take: 100, select: { id: true, email: true, applicationType: true, payload: true, createdAt: true } }),
   ]);
 
   const settings = publicContent.settings || DEFAULT_SETTINGS;
@@ -144,6 +146,8 @@ export default async function AdminPage() {
             </div>
           </div>
         </section>
+
+        <AdminApplicationInbox applications={applications.map((application) => ({ ...application, createdAt: application.createdAt.toISOString() }))} />
 
         {/* Creation Forms */}
         <section className="grid gap-6 lg:grid-cols-2">

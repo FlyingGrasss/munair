@@ -95,10 +95,47 @@ model ApplicationSubmission {
   claimId         String   @unique
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  adminEmails     AdminEmail[]
 
   @@index([email])
   @@index([applicationType])
   @@index([createdAt])
+}
+
+model AdminEmail {
+  id                     String          @id @default(cuid())
+  idempotencyKey         String          @unique
+  recipientEmail         String
+  subject                String
+  body                   String          @db.Text
+  status                 AdminEmailStatus @default(PROCESSING)
+  sheetSyncStatus        SheetSyncStatus @default(PENDING)
+  providerMessageId      String?
+  sheetMatches           Json?
+  lastErrorCode          String?
+  applicationSubmissionId String?
+  applicationSubmission  ApplicationSubmission? @relation(fields: [applicationSubmissionId], references: [id], onDelete: SetNull)
+  sentAt                 DateTime?
+  createdAt              DateTime        @default(now())
+  updatedAt              DateTime        @updatedAt
+
+  @@index([recipientEmail])
+  @@index([applicationSubmissionId])
+  @@index([createdAt])
+}
+
+enum AdminEmailStatus {
+  PROCESSING
+  SENT
+  FAILED
+}
+
+enum SheetSyncStatus {
+  PENDING
+  SYNCED
+  NOT_FOUND
+  UNCONFIGURED
+  FAILED
 }
 
 enum SubmissionStatus {
