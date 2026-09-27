@@ -1,17 +1,33 @@
-﻿export type ContentDocument = {
+export type ContentDocument = {
   title: string;
   url: string;
 };
+
+export function isSafeDocumentUrl(value: string) {
+  const url = value.trim();
+  if (url.startsWith("/") && !url.startsWith("//")) return true;
+
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" || parsed.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
 
 export function parseDocuments(value: FormDataEntryValue | null | unknown): ContentDocument[] {
   if (typeof value !== "string" || !value.trim()) {
     if (Array.isArray(value)) {
       return value.flatMap((item) => {
         if (item && typeof item === "object" && "title" in item && "url" in item) {
-          return [{ title: String(item.title), url: String(item.url) }];
+          const title = String(item.title).trim();
+          const url = String(item.url).trim();
+          return title && isSafeDocumentUrl(url) ? [{ title, url }] : [];
         }
         if (item && typeof item === "object" && "label" in item && "url" in item) {
-          return [{ title: String(item.label), url: String(item.url) }];
+          const title = String(item.label).trim();
+          const url = String(item.url).trim();
+          return title && isSafeDocumentUrl(url) ? [{ title, url }] : [];
         }
         return [];
       });
@@ -32,7 +48,7 @@ export function parseDocuments(value: FormDataEntryValue | null | unknown): Cont
         url,
       };
     })
-    .filter((document) => document.title && document.url);
+    .filter((document) => document.title && isSafeDocumentUrl(document.url));
 }
 
 export function stringifyDocuments(value: unknown) {

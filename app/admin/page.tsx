@@ -3,6 +3,7 @@ import Link from "next/link";
 import { logoutAction, revokeAllSessionsAction, createCommitteeAction, createTeamMemberAction, saveConferenceSettingsAction } from "@/app/admin/actions";
 import AdminSettingsForm from "@/components/admin/AdminSettingsForm";
 import AdminApplicationInbox from "@/components/admin/AdminApplicationInbox";
+import CommitteeDocumentsField from "@/components/admin/CommitteeDocumentsField";
 import ImageUrlField from "@/components/admin/ImageUrlField";
 import NameAndSlugFields from "@/components/admin/NameAndSlugFields";
 import { DEFAULT_SETTINGS } from "@/config/conference";
@@ -159,7 +160,7 @@ export default async function AdminPage() {
               <ImageUrlField name="imageUrl" id="committee-image-url" required />
             </div>
             <Textarea label="Description" name="description" required />
-            <Textarea label="Documents, one per line: Title | URL" name="documents" rows={3} />
+            <CommitteeDocumentsField name="documents" id="new-committee-documents" />
             <label className="flex items-center gap-2 text-sm text-white">
               <input name="isPublished" type="checkbox" defaultChecked />
               Published

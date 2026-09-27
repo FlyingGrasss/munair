@@ -2,6 +2,7 @@ import "server-only";
 
 import { cacheLife, cacheTag } from "next/cache";
 import { DEFAULT_COMMITTEES, DEFAULT_SETTINGS, DEFAULT_TEAM } from "@/config/conference";
+import { isSafeDocumentUrl } from "@/lib/documents";
 import type { PublicCommittee, PublicTeamMember, SiteSettings } from "@/types/conference";
 
 type PublicContent = {
@@ -51,8 +52,9 @@ function parseDocuments(value: unknown): PublicCommittee["documents"] {
   if (!Array.isArray(value)) return [];
   return value.flatMap((item) => {
     const entry = record(item);
-    return typeof entry?.label === "string" && typeof entry.url === "string"
-      ? [{ label: entry.label, url: entry.url }]
+    const label = typeof entry?.label === "string" ? entry.label : typeof entry?.title === "string" ? entry.title : "";
+    return label && typeof entry?.url === "string" && isSafeDocumentUrl(entry.url)
+      ? [{ label, url: entry.url }]
       : [];
   });
 }

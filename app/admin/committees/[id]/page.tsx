@@ -2,6 +2,7 @@ export const instant = false;
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { deleteCommitteeAction, updateCommitteeAction } from "@/app/admin/actions";
+import CommitteeDocumentsField from "@/components/admin/CommitteeDocumentsField";
 import ImageUrlField from "@/components/admin/ImageUrlField";
 import NameAndSlugFields from "@/components/admin/NameAndSlugFields";
 import { stringifyDocuments } from "@/lib/documents";
@@ -58,15 +59,7 @@ export default async function EditCommitteePage({
             className="rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-white outline-none focus:border-[var(--color-accent)]"
           />
         </label>
-        <label className="flex flex-col gap-2 text-sm text-white">
-          Documents (one per line: Title | URL)
-          <textarea
-            name="documents"
-            rows={4}
-            defaultValue={stringifyDocuments(committee.documents)}
-            className="rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-white outline-none focus:border-[var(--color-accent)]"
-          />
-        </label>
+        <CommitteeDocumentsField name="documents" id="committee-documents" defaultValue={stringifyDocuments(committee.documents)} />
         <label className="flex items-center gap-2 text-sm text-white">
           <input name="isPublished" type="checkbox" defaultChecked={committee.isPublished} />
           Published

@@ -49,9 +49,9 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
                   <p className="eyebrow text-white/45">Documents</p>
                   <div className="mt-5 flex flex-wrap gap-3">
                     {item.documents.map((document) => (
-                      <Link key={document.url} className="inline-flex items-center gap-2 border border-white/25 px-4 py-3 text-sm font-bold hover:border-[var(--red)]" href={document.url}>
+                      <a key={document.url} className="inline-flex items-center gap-2 border border-white/25 px-4 py-3 text-sm font-bold hover:border-[var(--red)]" href={document.url} target="_blank" rel="noreferrer">
                         <Download className="size-4" />{document.label}
-                      </Link>
+                      </a>
                     ))}
                   </div>
                 </div>
