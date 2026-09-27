@@ -77,7 +77,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     senderEmail: "MUNAIR <applications@example.com>",
     instagramUrl: "https://www.instagram.com/modelunair/",
     instagramHandle: "@modelunair",
-    location: { venue: "Havajet Aviation High School", city: "Izmir", country: "Turkey" },
+    location: { venue: "Havajet Aviation High School", city: "İzmir", country: "Türkiye" },
     organizer: { name: "MUNAIR Organization Team", creditName: "Emre Bozkurt", creditUrl: "https://www.instagram.com/emre.bozqurt/" },
   },
   sections: { about: true, letters: true, committees: true, team: true, applications: true, contact: true },

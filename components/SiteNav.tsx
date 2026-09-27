@@ -60,7 +60,7 @@ export default function SiteNav({ enabled }: { enabled: Record<string, boolean> 
   return <header className="site-header sticky top-0 z-50 text-white">
     <div className="site-container flex h-[var(--nav-height)] items-center justify-between gap-4">
       <Link href="/#top" onClick={(event) => handleNavClick("top", event)} className="nav-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--blue-light)]" aria-label="MUNAIR home">
-        <Image src="/munair_logo.jpg" alt="" width={52} height={52} className="size-10 object-cover" priority /><span className="nav-brand__lockup"><span className="nav-brand__name">MUNAIR</span><span className="nav-brand__year">&rsquo;27</span></span>
+        <Image src="/munair_logo.jpg" alt="" width={52} height={52} className="size-10 object-cover" priority /><span>MUNAIR</span>
       </Link>
       <nav className="hidden items-center gap-6 lg:flex" aria-label="Main navigation">{visible.map(({ id, label }) => <Link key={id} href={`/#${id}`} onClick={(event) => handleNavClick(id, event)} className={cn("text-[11px] font-extrabold uppercase tracking-[.15em] transition-colors hover:text-[var(--blue-light)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--blue)]", active === id ? "text-[var(--blue-light)]" : "text-white/68")} aria-current={active === id ? "location" : undefined}>{label}</Link>)}</nav>
       <DialogRoot open={open} onOpenChange={setOpen}>

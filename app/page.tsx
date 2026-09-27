@@ -33,7 +33,7 @@ export default async function Home() {
     <section id="top" className="home-hero">
       <div className="home-hero__wash" aria-hidden="true" />
       <div className="site-container home-hero__inner">
-        <div className="home-hero__eyebrow"><span>Model United Nations of Aviation</span><span>3rd official session</span><span>İzmir, Türkiye</span></div>
+        <div className="home-hero__eyebrow"><span>Model United Nations of Aviation</span><span>3rd official session</span><span>İZMİR, TÜRKİYE</span></div>
         <div className="home-hero__content">
           <FadeIn className="home-hero__copy" delay={80} direction="none">
             <p className="home-hero__overline">{conference.hashtag}</p>
