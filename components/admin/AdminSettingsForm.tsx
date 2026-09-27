@@ -549,6 +549,17 @@ export default function AdminSettingsForm({
           <p className="mb-5 text-sm text-white/65">
             Disable an application to remove it from the site and close its form.
           </p>
+          <div className="mb-5 grid gap-4 rounded-lg border border-[var(--color-accent)]/35 bg-[var(--color-accent)]/10 p-4">
+            <label className="flex items-start gap-3 text-sm text-white">
+              <input name="applicationsClosed" type="checkbox" defaultChecked={settings.applicationsClosed ?? false} className="mt-1" />
+              <span className="grid gap-1">
+                <span className="font-semibold">Close all applications</span>
+                <span className="text-xs text-white/65">Redirect every application card, Apply button, direct form, and submission attempt to the link below.</span>
+              </span>
+            </label>
+            <Field label="Closed applications redirect URL" name="applicationsClosedUrl" value={settings.applicationsClosedUrl ?? ""} />
+            <p className="text-xs text-white/55">Use a full http(s) URL or a local path such as /#applications. Saving is blocked until a valid URL is provided when the switch is enabled.</p>
+          </div>
           <div className="grid gap-5">
             {(settings.applications || []).map((application) => (
               <details key={application.id} className="rounded-lg border border-white/10 bg-white/5 p-4">

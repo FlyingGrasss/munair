@@ -23,6 +23,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ typ
   } catch { return error(400, "INVALID_JSON", "The verification request could not be read."); }
   if (typeof body.challengeId !== "string" || typeof body.code !== "string" || !/^\d{6}$/.test(body.code)) return error(422, "INVALID_CODE", "Enter the six-digit code from your email.");
   const { settings } = await getPublicContent();
+  if (settings.applicationsClosed) return error(410, "APPLICATIONS_CLOSED", "Applications are currently closed.");
   const result = validateApplication(type, body.payload, settings);
   if (!result.ok) return error(422, "VALIDATION_FAILED", "Please review your application.", result.errors);
   const challenge = await prisma.verificationChallenge.findUnique({ where: { id: body.challengeId } });

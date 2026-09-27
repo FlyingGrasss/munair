@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import FontVariant from "@/components/FontVariant";
 import SiteNav from "@/components/SiteNav";
 import SmoothScroll from "@/components/SmoothScroll";
+import { getApplicationsDestination } from "@/lib/applications/availability";
 import { SOCIAL_IMAGE_PATH } from "@/lib/seo";
 import { getPublicContent, publicSiteUrl } from "@/lib/site-settings";
 import "./globals.css";
@@ -111,7 +112,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <SmoothScroll>
           <FontVariant />
           <a className="skip-link" href="#main-content">Skip to content</a>
-          <SiteNav enabled={settings.sections} />
+          <SiteNav enabled={settings.sections} applicationHref={settings.applicationsClosed ? getApplicationsDestination(settings) : undefined} />
           <main id="main-content">{children}</main>
           {settings.sections.contact && <Footer settings={settings} />}
         </SmoothScroll>

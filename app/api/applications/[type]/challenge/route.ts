@@ -23,6 +23,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ typ
     body = JSON.parse(raw);
   } catch { return error(400, "INVALID_JSON", "The application could not be read."); }
   const { settings } = await getPublicContent();
+  if (settings.applicationsClosed) return error(410, "APPLICATIONS_CLOSED", "Applications are currently closed.");
   const application = settings.applications.find((item) => item.id === type);
   if (!application?.enabled) return error(404, "APPLICATION_CLOSED", "This application is currently closed.");
   const result = validateApplication(type, body, settings);

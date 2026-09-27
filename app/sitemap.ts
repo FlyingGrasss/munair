@@ -29,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })));
   }
 
-  if (settings.sections.applications) {
+  if (settings.sections.applications && !settings.applicationsClosed) {
     entries.push(...settings.applications.filter((application) => application.enabled).map((application) => ({
       url: `${base}/apply/${application.id}`,
       changeFrequency: "weekly" as const,

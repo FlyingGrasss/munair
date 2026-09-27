@@ -1,7 +1,7 @@
 "use server";
 
 import { assertOrigin, clearAdminSession, createAdminSession, verifyAdminPassword, requireAdminMutation, revokeAllAdminSessions } from "@/lib/admin-auth";
-import { parseDocuments } from "@/lib/documents";
+import { isSafeDocumentUrl, parseDocuments } from "@/lib/documents";
 import { prisma } from "@/lib/prisma";
 import { toSlug } from "@/lib/slug";
 import { getPublicContent, normalizeSettings } from "@/lib/site-settings";
@@ -224,6 +224,14 @@ export async function saveConferenceSettingsAction(formData: FormData) {
   settings.sections.letters = checkboxValue(formData, "sectionLetters");
   settings.sections.applications = checkboxValue(formData, "sectionApplications");
   settings.sections.contact = checkboxValue(formData, "sectionContact");
+
+  const applicationsClosed = checkboxValue(formData, "applicationsClosed");
+  const applicationsClosedUrl = stringValue(formData, "applicationsClosedUrl");
+  if (applicationsClosed && !isSafeDocumentUrl(applicationsClosedUrl)) {
+    return { ok: false, message: "Add a valid http(s) or local redirect URL before closing applications." };
+  }
+  settings.applicationsClosed = applicationsClosed;
+  settings.applicationsClosedUrl = applicationsClosedUrl && isSafeDocumentUrl(applicationsClosedUrl) ? applicationsClosedUrl : "";
 
   for (const application of settings.applications) {
     application.enabled = checkboxValue(formData, `application_${application.id}_enabled`);

@@ -23,15 +23,32 @@ export function normalizeSettings(value: unknown): SiteSettings {
   const organizer = record(conference.organizer) ?? {};
   const sections = record(source.sections) ?? {};
   const form = record(source.form) ?? {};
+  const hasLegacyPlaceholderDates =
+    conference.dates === "2027" &&
+    conference.startDateIso === "2027-01-01T09:00:00+03:00" &&
+    !conference.endDateIso;
+  const normalizedConference = {
+    ...DEFAULT_SETTINGS.conference,
+    ...conference,
+    ...(hasLegacyPlaceholderDates
+      ? {
+          dates: DEFAULT_SETTINGS.conference.dates,
+          startDateIso: DEFAULT_SETTINGS.conference.startDateIso,
+          endDateIso: DEFAULT_SETTINGS.conference.endDateIso,
+        }
+      : {}),
+    location: { ...DEFAULT_SETTINGS.conference.location, ...location },
+    organizer: { ...DEFAULT_SETTINGS.conference.organizer, ...organizer },
+  };
 
   return {
-    conference: {
-      ...DEFAULT_SETTINGS.conference,
-      ...conference,
-           location: { ...DEFAULT_SETTINGS.conference.location, ...location },
-      organizer: { ...DEFAULT_SETTINGS.conference.organizer, ...organizer },
-    } as SiteSettings["conference"],
+    conference: normalizedConference as SiteSettings["conference"],
     sections: { ...DEFAULT_SETTINGS.sections, ...sections } as SiteSettings["sections"],
+    applicationsClosed: source.applicationsClosed === true,
+    applicationsClosedUrl:
+      typeof source.applicationsClosedUrl === "string" && isSafeDocumentUrl(source.applicationsClosedUrl)
+        ? source.applicationsClosedUrl.trim()
+        : DEFAULT_SETTINGS.applicationsClosedUrl,
     applications: Array.isArray(source.applications)
       ? source.applications as SiteSettings["applications"]
       : structuredClone(DEFAULT_SETTINGS.applications),

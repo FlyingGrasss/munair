@@ -67,6 +67,8 @@ export type SiteSettings = {
     applications: boolean;
     contact: boolean;
   };
+  applicationsClosed: boolean;
+  applicationsClosedUrl: string;
   applications: ApplicationDefinition[];
   form: {
     minimumDelegates: number;
