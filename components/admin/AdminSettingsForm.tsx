@@ -554,11 +554,9 @@ export default function AdminSettingsForm({
               <input name="applicationsClosed" type="checkbox" defaultChecked={settings.applicationsClosed ?? false} className="mt-1" />
               <span className="grid gap-1">
                 <span className="font-semibold">Close all applications</span>
-                <span className="text-xs text-white/65">Redirect every application card, Apply button, direct form, and submission attempt to the link below.</span>
+                <span className="text-xs text-white/65">Close every application card, direct form, and submission attempt. The navbar and hero Apply buttons will still scroll to this section.</span>
               </span>
             </label>
-            <Field label="Closed applications redirect URL" name="applicationsClosedUrl" value={settings.applicationsClosedUrl ?? ""} />
-            <p className="text-xs text-white/55">Use a full http(s) URL or a local path such as /#applications. Saving is blocked until a valid URL is provided when the switch is enabled.</p>
           </div>
           <div className="grid gap-5">
             {(settings.applications || []).map((application) => (
@@ -572,6 +570,14 @@ export default function AdminSettingsForm({
                     <input name={`application_${application.id}_enabled`} type="checkbox" defaultChecked={application.enabled} />
                     Enabled
                   </label>
+                  <label className="flex items-start gap-2 text-sm text-white">
+                    <input name={`application_${application.id}_externalLinkEnabled`} type="checkbox" defaultChecked={application.externalLinkEnabled ?? false} className="mt-1" />
+                    <span className="grid gap-1">
+                      <span>Use an external form link</span>
+                      <span className="text-xs text-white/55">Use this application type Google Form or other external form instead of the on-site form.</span>
+                    </span>
+                  </label>
+                  <Field label="External form URL" name={`application_${application.id}_externalUrl`} type="url" value={application.externalUrl ?? ""} />
                   <div className="grid gap-4 sm:grid-cols-2">
                     <Field label="Card title" name={`application_${application.id}_title`} value={application.title} required />
                     <Field label="Form title" name={`application_${application.id}_formTitle`} value={application.formTitle} required />

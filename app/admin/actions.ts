@@ -225,16 +225,21 @@ export async function saveConferenceSettingsAction(formData: FormData) {
   settings.sections.applications = checkboxValue(formData, "sectionApplications");
   settings.sections.contact = checkboxValue(formData, "sectionContact");
 
-  const applicationsClosed = checkboxValue(formData, "applicationsClosed");
-  const applicationsClosedUrl = stringValue(formData, "applicationsClosedUrl");
-  if (applicationsClosed && !isSafeDocumentUrl(applicationsClosedUrl)) {
-    return { ok: false, message: "Add a valid http(s) or local redirect URL before closing applications." };
+  settings.applicationsClosed = checkboxValue(formData, "applicationsClosed");
+
+  for (const application of settings.applications) {
+    const externalEnabled = checkboxValue(formData, `application_${application.id}_externalLinkEnabled`);
+    const externalUrl = stringValue(formData, `application_${application.id}_externalUrl`);
+    if (externalEnabled && !isSafeDocumentUrl(externalUrl)) {
+      return { ok: false, message: `Add a valid external URL for ${application.title} before enabling its external form.` };
+    }
   }
-  settings.applicationsClosed = applicationsClosed;
-  settings.applicationsClosedUrl = applicationsClosedUrl && isSafeDocumentUrl(applicationsClosedUrl) ? applicationsClosedUrl : "";
 
   for (const application of settings.applications) {
     application.enabled = checkboxValue(formData, `application_${application.id}_enabled`);
+    application.externalLinkEnabled = checkboxValue(formData, `application_${application.id}_externalLinkEnabled`);
+    const externalUrl = stringValue(formData, `application_${application.id}_externalUrl`);
+    application.externalUrl = externalUrl && isSafeDocumentUrl(externalUrl) ? externalUrl : "";
     application.title = stringValue(formData, `application_${application.id}_title`) || application.title;
     application.formTitle = stringValue(formData, `application_${application.id}_formTitle`) || application.formTitle;
     application.description = stringValue(formData, `application_${application.id}_description`) || application.description;

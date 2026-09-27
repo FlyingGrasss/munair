@@ -45,12 +45,20 @@ export function normalizeSettings(value: unknown): SiteSettings {
     conference: normalizedConference as SiteSettings["conference"],
     sections: { ...DEFAULT_SETTINGS.sections, ...sections } as SiteSettings["sections"],
     applicationsClosed: source.applicationsClosed === true,
-    applicationsClosedUrl:
-      typeof source.applicationsClosedUrl === "string" && isSafeDocumentUrl(source.applicationsClosedUrl)
-        ? source.applicationsClosedUrl.trim()
-        : DEFAULT_SETTINGS.applicationsClosedUrl,
     applications: Array.isArray(source.applications)
-      ? source.applications as SiteSettings["applications"]
+      ? source.applications.map((value) => {
+          const entry = record(value) ?? {};
+          const fallback = DEFAULT_SETTINGS.applications.find((application) => application.id === entry.id);
+          const externalUrl = typeof entry.externalUrl === "string" && isSafeDocumentUrl(entry.externalUrl)
+            ? entry.externalUrl.trim()
+            : "";
+          return {
+            ...(fallback ?? {}),
+            ...entry,
+            externalLinkEnabled: entry.externalLinkEnabled === true,
+            externalUrl,
+          };
+        }) as SiteSettings["applications"]
       : structuredClone(DEFAULT_SETTINGS.applications),
     form: {
       ...DEFAULT_SETTINGS.form,

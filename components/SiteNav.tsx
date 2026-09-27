@@ -21,7 +21,7 @@ const links: ReadonlyArray<{ id: string; label: string; icon: LucideIcon }> = [
   { id: "contact", label: "Contact", icon: MessageCircle },
 ];
 
-export default function SiteNav({ enabled, applicationHref }: { enabled: Record<string, boolean>; applicationHref?: string }) {
+export default function SiteNav({ enabled }: { enabled: Record<string, boolean> }) {
   const [active, setActive] = useState("about");
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -67,11 +67,11 @@ export default function SiteNav({ enabled, applicationHref }: { enabled: Record<
       <Link href="/#top" onClick={(event) => handleNavClick("top", event)} className="nav-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--blue-light)]" aria-label="MUNAIR home">
         <Image src="/munair_logo.jpg" alt="" width={52} height={52} className="size-10 object-cover" priority /><span>MUNAIR</span>
       </Link>
-      <nav className="hidden items-center gap-6 lg:flex" aria-label="Main navigation">{visible.map(({ id, label }) => <Link key={id} href={id === "applications" && applicationHref ? applicationHref : `/#${id}`} onClick={id === "applications" && applicationHref ? undefined : (event) => handleNavClick(id, event)} className={cn("text-[11px] font-extrabold uppercase tracking-[.15em] transition-colors hover:text-[var(--blue-light)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--blue)]", active === id ? "text-[var(--blue-light)]" : "text-white/68")} aria-current={active === id ? "location" : undefined}>{label}</Link>)}</nav>
+      <nav className="hidden items-center gap-6 lg:flex" aria-label="Main navigation">{visible.map(({ id, label }) => <Link key={id} href={`/#${id}`} onClick={(event) => handleNavClick(id, event)} className={cn("text-[11px] font-extrabold uppercase tracking-[.15em] transition-colors hover:text-[var(--blue-light)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--blue)]", active === id ? "text-[var(--blue-light)]" : "text-white/68")} aria-current={active === id ? "location" : undefined}>{label}</Link>)}</nav>
       <DialogRoot open={open} onOpenChange={setOpen}>
         <DialogTrigger className="grid size-11 place-items-center border border-white/25 bg-white/5 text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] lg:hidden" aria-label={open ? "Close navigation" : "Open navigation"} aria-expanded={open} aria-controls="mobile-navigation-drawer"><Menu aria-hidden="true" size={21} /></DialogTrigger>
         <DialogContent id="mobile-navigation-drawer" title="Navigation" description="Move through MUNAIR’27." variant="drawer">
-          <nav className="flex flex-col" aria-label="Mobile navigation">{visible.map(({ id, label, icon: Icon }) => <Link key={id} href={id === "applications" && applicationHref ? applicationHref : `/#${id}`} onClick={id === "applications" && applicationHref ? undefined : (event) => handleNavClick(id, event)} className={cn("group flex min-h-12 items-center gap-3 border-t border-white/12 py-3 text-lg font-semibold transition-colors last:border-b focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--blue)]", active === id ? "text-[var(--blue-light)]" : "text-white hover:text-[var(--blue-light)]")} aria-current={active === id ? "location" : undefined}><Icon aria-hidden="true" className="size-[1.1rem] shrink-0" strokeWidth={1.8} /><span>{label}</span><ArrowUpRight aria-hidden="true" className="ml-auto size-4 opacity-45" /></Link>)}</nav>
+          <nav className="flex flex-col" aria-label="Mobile navigation">{visible.map(({ id, label, icon: Icon }) => <Link key={id} href={`/#${id}`} onClick={(event) => handleNavClick(id, event)} className={cn("group flex min-h-12 items-center gap-3 border-t border-white/12 py-3 text-lg font-semibold transition-colors last:border-b focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--blue)]", active === id ? "text-[var(--blue-light)]" : "text-white hover:text-[var(--blue-light)]")} aria-current={active === id ? "location" : undefined}><Icon aria-hidden="true" className="size-[1.1rem] shrink-0" strokeWidth={1.8} /><span>{label}</span><ArrowUpRight aria-hidden="true" className="ml-auto size-4 opacity-45" /></Link>)}</nav>
         </DialogContent>
       </DialogRoot>
     </div>

@@ -5,6 +5,7 @@ import { getPublicContent } from "@/lib/site-settings";
 import { prisma } from "@/lib/prisma";
 import { allowRequest, hashCode, makeCode, requestIp, sha256, stableJson } from "@/lib/applications/security";
 import { isApplicationType, validateApplication } from "@/lib/applications/validation";
+import { getExternalApplicationDestination } from "@/lib/applications/availability";
 
 const error = (status: number, code: string, message: string, details?: unknown) => NextResponse.json({ ok: false, error: { code, message, details } }, { status });
 
@@ -26,6 +27,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ typ
   if (settings.applicationsClosed) return error(410, "APPLICATIONS_CLOSED", "Applications are currently closed.");
   const application = settings.applications.find((item) => item.id === type);
   if (!application?.enabled) return error(404, "APPLICATION_CLOSED", "This application is currently closed.");
+  if (getExternalApplicationDestination(settings, type)) return error(410, "EXTERNAL_APPLICATION", "This application uses an external form.");
   const result = validateApplication(type, body, settings);
   if (!result.ok) return error(422, "VALIDATION_FAILED", "Please review the highlighted fields.", result.errors);
   const existing = await prisma.submissionClaim.findUnique({ where: { email_applicationType: { email: result.email, applicationType: type } } });

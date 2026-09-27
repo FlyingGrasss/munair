@@ -27,6 +27,8 @@ export type ApplicationDefinition = {
   formTitle: string;
   description: string;
   imageUrl?: string;
+  externalLinkEnabled: boolean;
+  externalUrl: string;
 };
 
 export type LetterDefinition = {
@@ -68,7 +70,6 @@ export type SiteSettings = {
     contact: boolean;
   };
   applicationsClosed: boolean;
-  applicationsClosedUrl: string;
   applications: ApplicationDefinition[];
   form: {
     minimumDelegates: number;

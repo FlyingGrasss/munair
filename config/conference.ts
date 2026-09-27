@@ -82,13 +82,12 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   },
   sections: { about: true, letters: true, committees: true, team: true, applications: true, contact: true },
   applicationsClosed: false,
-  applicationsClosedUrl: "",
   applications: [
-    { id: "delegate", enabled: true, title: "Delegate", formTitle: "Delegate Application", description: "Represent a nation, research global issues, and turn debate into practical diplomacy." },
-    { id: "chair", enabled: true, title: "Chairboard", formTitle: "Chairboard Application", description: "Guide procedure, protect productive debate, and help every delegate contribute." },
-    { id: "delegation", enabled: true, title: "Delegation", formTitle: "Delegation Application", description: "Bring your school or organization to MUNAIR as one coordinated delegation." },
-    { id: "press", enabled: true, title: "Press", formTitle: "Press Application", description: "Document the conference through reporting, photography, and visual storytelling." },
-    { id: "admin", enabled: true, title: "Admin", formTitle: "Admin Application", description: "Keep the conference moving through communication, logistics, and participant support." },
+    { id: "delegate", enabled: true, externalLinkEnabled: false, externalUrl: "", title: "Delegate", formTitle: "Delegate Application", description: "Represent a nation, research global issues, and turn debate into practical diplomacy." },
+    { id: "chair", enabled: true, externalLinkEnabled: false, externalUrl: "", title: "Chairboard", formTitle: "Chairboard Application", description: "Guide procedure, protect productive debate, and help every delegate contribute." },
+    { id: "delegation", enabled: true, externalLinkEnabled: false, externalUrl: "", title: "Delegation", formTitle: "Delegation Application", description: "Bring your school or organization to MUNAIR as one coordinated delegation." },
+    { id: "press", enabled: true, externalLinkEnabled: false, externalUrl: "", title: "Press", formTitle: "Press Application", description: "Document the conference through reporting, photography, and visual storytelling." },
+    { id: "admin", enabled: true, externalLinkEnabled: false, externalUrl: "", title: "Admin", formTitle: "Admin Application", description: "Keep the conference moving through communication, logistics, and participant support." },
   ],
   form: { minimumDelegates: 4, committeePreferenceCount: 3, questions },
   letters: [{

@@ -7,7 +7,7 @@ import ScrollToSectionLink from "@/components/ScrollToSectionLink";
 import SessionCountdown from "@/components/SessionCountdown";
 import StructuredData from "@/components/StructuredData";
 import { formatConferenceText } from "@/config/conference";
-import { getApplicationHref, getApplicationsDestination } from "@/lib/applications/availability";
+import { getApplicationHref, getExternalApplicationDestination } from "@/lib/applications/availability";
 import { getPublicContent } from "@/lib/site-settings";
 import type { ApplicationType } from "@/types/conference";
 
@@ -27,7 +27,6 @@ function SectionLabel({ index, children }: { index: string; children: React.Reac
 export default async function Home() {
   const { settings, committees, team } = await getPublicContent();
   const { conference } = settings;
-  const applicationsDestination = getApplicationsDestination(settings);
 
   return <>
     <StructuredData settings={settings} />
@@ -42,7 +41,7 @@ export default async function Home() {
             <div className="home-hero__wordmark"><h1>MUNAIR</h1><span className="home-hero__year">&rsquo;27</span></div>
             <p className="home-hero__intro">A student-led conference for people who want to understand the world, challenge assumptions, and make the room move.</p>
             <div className="home-hero__actions">
-              {settings.applicationsClosed ? <a href={applicationsDestination} className="hero-cta">Apply <ArrowUpRight aria-hidden="true" /></a> : <ScrollToSectionLink sectionId="applications" className="hero-cta">Apply <ArrowUpRight aria-hidden="true" /></ScrollToSectionLink>}
+              <ScrollToSectionLink sectionId="applications" className="hero-cta">Apply <ArrowUpRight aria-hidden="true" /></ScrollToSectionLink>
               <ScrollToSectionLink sectionId="committees" className="hero-link">See the committees</ScrollToSectionLink>
             </div>
           </FadeIn>
@@ -79,7 +78,7 @@ export default async function Home() {
 
     {settings.sections.applications && <section id="applications" className="home-applications"><div className="site-container">
       <div className="applications-top"><SectionLabel index="05">Applications</SectionLabel><h2>There is a place<br />for you here.</h2><p>{settings.applicationsClosed ? "Applications are currently closed." : "Choose the role that fits the way you want to contribute. All applications are open."}</p></div>
-      <div className="application-grid">{settings.applications.map((application, index) => { const Icon = applicationIcons[application.id]; const content = <div className="application-card__copy"><span>{String(index + 1).padStart(2, "0")}</span><Icon aria-hidden="true" className="application-card__icon" /><div><h3>{application.title}</h3><p>{application.description}</p></div><ArrowUpRight aria-hidden="true" /></div>; return settings.applicationsClosed ? <a key={application.id} href={getApplicationHref(settings, application.id)} className="application-card">{content}</a> : <Link key={application.id} href={getApplicationHref(settings, application.id)} className="application-card">{content}</Link>; })}</div>
+      <div className="application-grid">{settings.applications.map((application, index) => { const Icon = applicationIcons[application.id]; const content = <div className="application-card__copy"><span>{String(index + 1).padStart(2, "0")}</span><Icon aria-hidden="true" className="application-card__icon" /><div><h3>{application.title}</h3><p>{application.description}</p></div><ArrowUpRight aria-hidden="true" /></div>; if (settings.applicationsClosed || !application.enabled) return <div key={application.id} className="application-card" aria-disabled="true">{content}</div>; const externalHref = getExternalApplicationDestination(settings, application.id); return externalHref ? <a key={application.id} href={externalHref} target="_blank" rel="noreferrer" className="application-card">{content}</a> : <Link key={application.id} href={getApplicationHref(settings, application.id)} className="application-card">{content}</Link>; })}</div>
     </div></section>}
 
     <section id="venue" className="home-venue"><div className="site-container venue-grid"><div><SectionLabel index="06">Venue</SectionLabel><h2>See you<br />in İzmir.</h2></div><div className="venue-card"><p>Havajet Havacılık Lisesi<br />İzmir, Türkiye 35672</p><Link href={MAPS_URL} target="_blank" rel="noreferrer"><span>Open in Google Maps</span><Image src="/google-maps-icon.png" alt="" width={20} height={20} className="google-maps-icon" /><ArrowUpRight aria-hidden="true" /></Link></div></div></section>

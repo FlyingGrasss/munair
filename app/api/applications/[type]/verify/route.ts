@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { allowRequest, equalHash, hashCode, requestIp, sha256, stableJson } from "@/lib/applications/security";
 import { isApplicationType, validateApplication } from "@/lib/applications/validation";
+import { getExternalApplicationDestination } from "@/lib/applications/availability";
 import { prisma } from "@/lib/prisma";
 import { getPublicContent } from "@/lib/site-settings";
 import type { Prisma } from "@/lib/generated/prisma/client";
@@ -24,6 +25,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ typ
   if (typeof body.challengeId !== "string" || typeof body.code !== "string" || !/^\d{6}$/.test(body.code)) return error(422, "INVALID_CODE", "Enter the six-digit code from your email.");
   const { settings } = await getPublicContent();
   if (settings.applicationsClosed) return error(410, "APPLICATIONS_CLOSED", "Applications are currently closed.");
+  if (getExternalApplicationDestination(settings, type)) return error(410, "EXTERNAL_APPLICATION", "This application uses an external form.");
   const result = validateApplication(type, body.payload, settings);
   if (!result.ok) return error(422, "VALIDATION_FAILED", "Please review your application.", result.errors);
   const challenge = await prisma.verificationChallenge.findUnique({ where: { id: body.challengeId } });

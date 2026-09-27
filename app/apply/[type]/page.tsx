@@ -7,7 +7,7 @@ import { getPublicContent } from "@/lib/site-settings";
 import { pageMetadata } from "@/lib/seo";
 import { isApplicationType } from "@/lib/applications/validation";
 import { isAdmin } from "@/lib/admin-auth";
-import { getApplicationsDestination } from "@/lib/applications/availability";
+import { getApplicationHref, getExternalApplicationDestination, getApplicationsDestination } from "@/lib/applications/availability";
 
 export const instant = false;
 
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ type: str
   const application = settings.applications.find((item) => item.id === type);
   if (!application) return { title: "Application", robots: { index: false, follow: false } };
 
-  if (settings.applicationsClosed) return { title: "Applications closed", robots: { index: false, follow: false } };
+  if (settings.applicationsClosed || getExternalApplicationDestination(settings, type)) return { title: "Application unavailable", robots: { index: false, follow: false } };
 
   return pageMetadata({
     settings,
@@ -33,9 +33,13 @@ export default async function ApplicationPage({ params, searchParams }: { params
   if (!isApplicationType(type)) notFound();
   const preview = (await searchParams).preview === "1" && await isAdmin();
   const { settings } = await getPublicContent();
-  if (settings.applicationsClosed && !preview) redirect(getApplicationsDestination(settings));
+  if (settings.applicationsClosed && !preview) redirect(getApplicationsDestination());
   const application = settings.applications.find((item) => item.id === type && (item.enabled || preview));
   if (!application) notFound();
+  if (!preview) {
+    const externalHref = getExternalApplicationDestination(settings, type);
+    if (externalHref) redirect(getApplicationHref(settings, type));
+  }
   return <main className="application-page"><div className="site-container application-page__shell">
     <div className="application-page__top"><Link href="/#applications"><ArrowLeft aria-hidden="true" /> Back to applications</Link><span>{application.title}</span></div>
     <div className="application-page__hero">
