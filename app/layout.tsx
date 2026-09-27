@@ -63,8 +63,8 @@ export async function generateMetadata(): Promise<Metadata> {
     creator: conference.organizer.name || conference.brandName,
     publisher: conference.organizer.name || conference.brandName,
     icons: {
-      icon: [{ url: "/icon.png", type: "image/png" }],
-      apple: [{ url: "/icon.png", type: "image/png" }],
+      icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
+      apple: [{ url: "/icon.png", sizes: "180x180", type: "image/png" }],
     },
     openGraph: {
       title: `${conference.displayName} | ${conference.fullName}`,
