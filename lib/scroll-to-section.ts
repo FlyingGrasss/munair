@@ -2,7 +2,7 @@ type ScrollController = {
   scrollTo: (target: HTMLElement, options: { offset: number; duration: number }) => void;
 };
 
-const extraOffset = 86;
+const extraOffset = 87;
 
 export function scrollToSection(id: string, controller: ScrollController | null | undefined): boolean {
   const target = document.getElementById(id);
