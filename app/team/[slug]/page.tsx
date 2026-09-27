@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getTeamMemberBySlug } from "@/lib/site-settings";
+import { getPublicContent } from "@/lib/site-settings";
+import { pageMetadata } from "@/lib/seo";
 
 import FadeIn from "@/components/FadeIn";
 
@@ -11,8 +13,17 @@ export const instant = false;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const item = await getTeamMemberBySlug(slug);
-  return { title: item?.name || "Team", description: item?.bio };
+  const [{ settings }, item] = await Promise.all([getPublicContent(), getTeamMemberBySlug(slug)]);
+  if (!item) return { title: "Team", robots: { index: false, follow: false } };
+
+  return pageMetadata({
+    settings,
+    title: item.name,
+    description: `${item.bio} Meet the ${item.role} behind ${settings.conference.displayName}.`,
+    path: `/team/${item.slug}`,
+    imagePath: item.imageUrl || undefined,
+    imageAlt: `${item.name} - ${item.role}`,
+  });
 }
 
 export default async function TeamPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -29,7 +40,7 @@ export default async function TeamPage({ params }: { params: Promise<{ slug: str
       <div className="mt-12 grid gap-12 lg:grid-cols-[24rem_1fr]">
         <FadeIn delay={120} className="relative aspect-[4/5] bg-[var(--buffalo)]">
           {item.imageUrl ? (
-            <Image src={item.imageUrl} alt="" fill unoptimized className="object-cover" sizes="400px" />
+            <Image src={item.imageUrl} alt={`${item.name} - ${item.role}`} fill unoptimized className="object-cover" sizes="400px" />
           ) : (
             <div className="grid size-full place-items-center font-display text-8xl text-[var(--brown)]">{item.name.charAt(0)}</div>
           )}

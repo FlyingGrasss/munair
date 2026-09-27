@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import FontVariant from "@/components/FontVariant";
 import SiteNav from "@/components/SiteNav";
 import SmoothScroll from "@/components/SmoothScroll";
+import { SOCIAL_IMAGE_PATH } from "@/lib/seo";
 import { getPublicContent, publicSiteUrl } from "@/lib/site-settings";
 import "./globals.css";
 
@@ -49,15 +50,28 @@ export async function generateMetadata(): Promise<Metadata> {
   const { settings } = await getPublicContent();
   const siteUrl = publicSiteUrl(settings);
   const conference = settings.conference;
+  const description = `${conference.sessionName}. Join MUNAIR in ${conference.location.city}, ${conference.location.country} in ${conference.dates}. ${conference.hashtag}`;
+  const keywords = [
+    conference.shortName,
+    conference.brandName,
+    conference.fullName,
+    "MUN",
+    "Model United Nations",
+    "MUNAIR 2027",
+    "Izmir MUN",
+    "Turkey MUN",
+    "aviation high school",
+  ];
 
   return {
     metadataBase: new URL(siteUrl),
+    applicationName: conference.displayName,
     title: {
       default: conference.displayName,
       template: `%s | ${conference.displayName}`,
     },
-    description: `${conference.sessionName}. Join us on ${conference.dates}. ${conference.hashtag}`,
-    keywords: [conference.shortName, conference.brandName, "MUN", "Model United Nations", "MUNAIR 2027", "Izmir MUN", "aviation high school"],
+    description,
+    keywords,
     alternates: { canonical: "/" },
     authors: [{ name: conference.organizer.name || conference.brandName }],
     creator: conference.organizer.name || conference.brandName,
@@ -68,19 +82,21 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     openGraph: {
       title: `${conference.displayName} | ${conference.fullName}`,
-      description: `${conference.dates} | ${conference.sessionName}.`,
+      description,
       url: siteUrl,
       siteName: conference.displayName,
-      images: [{ url: `${siteUrl}/icon.png`, width: 640, height: 640, alt: `${conference.displayName} - ${conference.fullName}` }],
+      images: [{ url: `${siteUrl}${SOCIAL_IMAGE_PATH}`, width: 640, height: 640, alt: `${conference.displayName} - ${conference.fullName}` }],
       locale: "en_US",
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: `${conference.displayName} | ${conference.fullName}`,
-      description: `${conference.dates} | ${conference.hashtag}`,
-      images: [`${siteUrl}/icon.png`],
+      description,
+      images: [`${siteUrl}${SOCIAL_IMAGE_PATH}`],
     },
+    referrer: "origin-when-cross-origin",
+    formatDetection: { telephone: false },
     robots: { index: true, follow: true, nocache: false, googleBot: { index: true, follow: true, noimageindex: false } },
   };
 }

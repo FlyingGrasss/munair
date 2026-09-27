@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ArrowLeft, Download } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getCommitteeBySlug } from "@/lib/site-settings";
+import { getPublicContent } from "@/lib/site-settings";
+import { pageMetadata } from "@/lib/seo";
 
 import FadeIn from "@/components/FadeIn";
 
@@ -11,8 +13,17 @@ export const instant = false;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const item = await getCommitteeBySlug(slug);
-  return { title: item?.name || "Committee", description: item?.description };
+  const [{ settings }, item] = await Promise.all([getPublicContent(), getCommitteeBySlug(slug)]);
+  if (!item) return { title: "Committee", robots: { index: false, follow: false } };
+
+  return pageMetadata({
+    settings,
+    title: item.name,
+    description: `${item.description} Explore study materials and committee information for ${settings.conference.displayName}.`,
+    path: `/committees/${item.slug}`,
+    imagePath: item.imageUrl || undefined,
+    imageAlt: `${item.name} committee`,
+  });
 }
 
 export default async function CommitteePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -49,7 +60,7 @@ export default async function CommitteePage({ params }: { params: Promise<{ slug
           </FadeIn>
           <FadeIn delay={220} className="relative aspect-square bg-[var(--brown)]">
             {item.imageUrl ? (
-              <Image src={item.imageUrl} alt="" fill unoptimized className="object-cover" sizes="400px" />
+              <Image src={item.imageUrl} alt={`${item.name} committee`} fill unoptimized className="object-cover" sizes="400px" />
             ) : (
               <div className="grid size-full place-items-center font-display text-8xl text-white/50">{item.name.charAt(0)}</div>
             )}

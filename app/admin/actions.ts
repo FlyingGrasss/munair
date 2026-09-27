@@ -26,6 +26,11 @@ function checkboxValue(formData: FormData, key: string) {
   return formData.get(key) === "on";
 }
 
+function revalidatePublicMetadata() {
+  revalidatePath("/sitemap.xml");
+  revalidatePath("/robots.txt");
+}
+
 export async function loginAction(formData: FormData) {
   await assertOrigin();
   const requestHeaders = await headers();
@@ -72,6 +77,7 @@ export async function createCommitteeAction(formData: FormData) {
   });
 
   updateTag("site-content");
+  revalidatePublicMetadata();
   revalidatePath("/committees");
   revalidatePath("/");
   redirect("/admin");
@@ -98,6 +104,7 @@ export async function updateCommitteeAction(id: number, formData: FormData) {
   });
 
   updateTag("site-content");
+  revalidatePublicMetadata();
   revalidatePath("/committees");
   revalidatePath("/");
   redirect("/admin");
@@ -107,6 +114,7 @@ export async function deleteCommitteeAction(id: number) {
   await requireAdminMutation();
   await prisma.committee.delete({ where: { id } });
   updateTag("site-content");
+  revalidatePublicMetadata();
   revalidatePath("/committees");
   revalidatePath("/");
   redirect("/admin");
@@ -132,6 +140,7 @@ export async function createTeamMemberAction(formData: FormData) {
   });
 
   updateTag("site-content");
+  revalidatePublicMetadata();
   revalidatePath("/team");
   revalidatePath("/");
   redirect("/admin");
@@ -159,6 +168,7 @@ export async function updateTeamMemberAction(id: number, formData: FormData) {
   });
 
   updateTag("site-content");
+  revalidatePublicMetadata();
   revalidatePath("/team");
   revalidatePath("/");
   redirect("/admin");
@@ -168,6 +178,7 @@ export async function deleteTeamMemberAction(id: number) {
   await requireAdminMutation();
   await prisma.teamMember.delete({ where: { id } });
   updateTag("site-content");
+  revalidatePublicMetadata();
   revalidatePath("/team");
   revalidatePath("/");
   redirect("/admin");
@@ -278,6 +289,7 @@ export async function saveConferenceSettingsAction(formData: FormData) {
   });
 
   updateTag("site-content");
+  revalidatePublicMetadata();
   revalidatePath("/", "layout");
   revalidatePath("/apply");
   revalidatePath("/committees");

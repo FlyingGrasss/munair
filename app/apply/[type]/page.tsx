@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import ApplicationForm from "@/components/ApplicationForm";
 import { getPublicContent } from "@/lib/site-settings";
+import { pageMetadata } from "@/lib/seo";
 import { isApplicationType } from "@/lib/applications/validation";
 import { isAdmin } from "@/lib/admin-auth";
 
@@ -12,7 +13,16 @@ export const instant = false;
 export async function generateMetadata({ params }: { params: Promise<{ type: string }> }): Promise<Metadata> {
   const { type } = await params; const { settings } = await getPublicContent();
   const application = settings.applications.find((item) => item.id === type);
-  return { title: application?.formTitle || "Application" };
+  if (!application) return { title: "Application", robots: { index: false, follow: false } };
+
+  return pageMetadata({
+    settings,
+    title: application.formTitle,
+    description: `${application.description} Apply to join ${settings.conference.displayName}.`,
+    path: `/apply/${application.id}`,
+    imageAlt: `${settings.conference.displayName} application`,
+    noIndex: !application.enabled,
+  });
 }
 
 export default async function ApplicationPage({ params, searchParams }: { params: Promise<{ type: string }>; searchParams: Promise<{ preview?: string }> }) {
