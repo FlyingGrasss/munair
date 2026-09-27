@@ -71,7 +71,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: `${conference.dates} | ${conference.sessionName}.`,
       url: siteUrl,
       siteName: conference.displayName,
-      images: [{ url: `${siteUrl}/opengraph-image.png`, width: 1734, height: 907, alt: `${conference.displayName} - ${conference.fullName}` }],
+      images: [{ url: `${siteUrl}/icon.png`, width: 640, height: 640, alt: `${conference.displayName} - ${conference.fullName}` }],
       locale: "en_US",
       type: "website",
     },
@@ -79,7 +79,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: `${conference.displayName} | ${conference.fullName}`,
       description: `${conference.dates} | ${conference.hashtag}`,
-      images: [`${siteUrl}/opengraph-image.png`],
+      images: [`${siteUrl}/icon.png`],
     },
     robots: { index: true, follow: true, nocache: false, googleBot: { index: true, follow: true, noimageindex: false } },
   };
