@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useLenis } from "lenis/react";
 import type { AnchorHTMLAttributes, MouseEvent } from "react";
+import { scrollToSection } from "@/lib/scroll-to-section";
 
 type Props = AnchorHTMLAttributes<HTMLAnchorElement> & { sectionId: string };
 
@@ -13,15 +14,8 @@ export default function ScrollToSectionLink({ sectionId, onClick, ...props }: Pr
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event);
     if (event.defaultPrevented || pathname !== "/") return;
-
-    const target = document.getElementById(sectionId);
-    if (!target) return;
     event.preventDefault();
-
-    const offset = -(document.querySelector("header")?.getBoundingClientRect().height ?? 80);
-    if (lenis) lenis.scrollTo(target, { offset });
-    else target.scrollIntoView({ behavior: "smooth" });
-    window.history.replaceState(null, "", `/#${sectionId}`);
+    scrollToSection(sectionId, lenis);
   };
 
   return <a {...props} href={`/#${sectionId}`} onClick={handleClick} />;

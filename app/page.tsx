@@ -57,7 +57,7 @@ export default async function Home() {
 
     {settings.sections.about && <section id="about" className="home-introduction"><div className="site-container">
       <div className="introduction-top"><SectionLabel index="01">MUNAIR</SectionLabel><p>Model United Nations<br />of Aviation</p></div>
-      <div className="introduction-grid"><FadeIn className="introduction-image" direction="none"><Image src="/munair_logo.jpg" alt="MUNAIR globe and wings emblem" fill sizes="(max-width: 767px) 100vw, 55vw" className="logo-placeholder" /></FadeIn><FadeIn className="introduction-copy" delay={100}><h2>A room for<br /><em>better questions.</em></h2><p>MUNAIR’27 is built around research, respectful disagreement, and the confidence to speak when the answer is not obvious.</p><Link href="#letters">Read the welcome letter <ArrowUpRight aria-hidden="true" /></Link></FadeIn></div>
+      <div className="introduction-grid"><FadeIn className="introduction-image" direction="none"><Image src="/munair_logo.jpg" alt="MUNAIR globe and wings emblem" fill sizes="(max-width: 767px) 100vw, 55vw" className="logo-placeholder" /></FadeIn><FadeIn className="introduction-copy" delay={100}><h2>A room for<br /><em>better questions.</em></h2><p>MUNAIR’27 is built around research, respectful disagreement, and the confidence to speak when the answer is not obvious.</p><ScrollToSectionLink sectionId="letters">Read the welcome letter <ArrowUpRight aria-hidden="true" /></ScrollToSectionLink></FadeIn></div>
     </div></section>}
 
     {settings.sections.committees && <section id="committees" className="home-committees"><div className="site-container">

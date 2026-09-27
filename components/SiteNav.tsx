@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { useLenis } from "lenis/react";
 import { DialogContent, DialogRoot, DialogTrigger } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import { scrollToSection } from "@/lib/scroll-to-section";
 
 const links: ReadonlyArray<{ id: string; label: string; icon: LucideIcon }> = [
   { id: "about", label: "About", icon: Compass },
@@ -27,6 +28,12 @@ export default function SiteNav({ enabled }: { enabled: Record<string, boolean> 
   const lenis = useLenis();
 
   useEffect(() => {
+    const hash = window.location.hash;
+    const firstHash = hash.match(/^#([a-z0-9_-]+)/i)?.[1];
+    if (firstHash && hash !== `#${firstHash}`) {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#${firstHash}`);
+    }
+
     const sections = links.flatMap(({ id }) => { const element = document.getElementById(id); return element ? [element] : []; });
     const observer = new IntersectionObserver((entries) => {
       const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
@@ -42,17 +49,15 @@ export default function SiteNav({ enabled }: { enabled: Record<string, boolean> 
       return;
     }
     event.preventDefault();
-    const target = document.getElementById(id);
-    if (!target) return;
-    const offset = -(document.querySelector("header")?.getBoundingClientRect().height ?? 80);
     setOpen(false);
     window.requestAnimationFrame(() => {
-      if (lenis) {
-        lenis.scrollTo(target, { offset, duration: 0.65 });
-      } else {
-        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY + offset, behavior: "smooth" });
+      if (id === "top") {
+        window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+        if (lenis) lenis.scrollTo(document.documentElement, { offset: 0, duration: 0.65 });
+        else window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
       }
-      window.history.replaceState(null, "", id === "top" ? "/" : `/#${id}`);
+      scrollToSection(id, lenis);
     });
   };
 
