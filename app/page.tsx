@@ -27,6 +27,8 @@ function SectionLabel({ index, children }: { index: string; children: React.Reac
 export default async function Home() {
   const { settings, committees, team } = await getPublicContent();
   const { conference } = settings;
+  const mapQuery = [conference.location.venue, conference.location.city, conference.location.country].join(", ");
+  const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
 
   return <>
     <StructuredData settings={settings} />
@@ -81,6 +83,6 @@ export default async function Home() {
       <div className="application-grid">{settings.applications.map((application, index) => { const Icon = applicationIcons[application.id]; const content = <div className="application-card__copy"><span>{String(index + 1).padStart(2, "0")}</span><Icon aria-hidden="true" className="application-card__icon" /><div><h3>{application.title}</h3><p>{application.description}</p></div><ArrowUpRight aria-hidden="true" /></div>; if (settings.applicationsClosed || !application.enabled) return <div key={application.id} className="application-card" aria-disabled="true">{content}</div>; const externalHref = getExternalApplicationDestination(settings, application.id); return externalHref ? <a key={application.id} href={externalHref} target="_blank" rel="noreferrer" className="application-card">{content}</a> : <Link key={application.id} href={getApplicationHref(settings, application.id)} className="application-card">{content}</Link>; })}</div>
     </div></section>}
 
-    <section id="venue" className="home-venue"><div className="site-container venue-grid"><div><SectionLabel index="06">Venue</SectionLabel><h2>See you<br />in İzmir.</h2></div><div className="venue-card"><p>Havajet Havacılık Lisesi<br />İzmir, Türkiye 35672</p><Link href={MAPS_URL} target="_blank" rel="noreferrer"><span>Open in Google Maps</span><Image src="/google-maps-icon.png" alt="" width={20} height={20} className="google-maps-icon" /><ArrowUpRight aria-hidden="true" /></Link></div></div></section>
+    <section id="venue" className="home-venue"><div className="site-container venue-grid"><div><SectionLabel index="06">Venue</SectionLabel><h2>See you<br />in İzmir.</h2></div><div className="venue-card"><p>Havajet Havacılık Lisesi<br />İzmir, Türkiye 35672</p><Link href={MAPS_URL} target="_blank" rel="noreferrer"><span>Open in Google Maps</span><Image src="/google-maps-icon.png" alt="" width={20} height={20} className="google-maps-icon" /><ArrowUpRight aria-hidden="true" /></Link><div className="venue-map"><iframe title={`Map showing ${mapQuery}`} src={mapEmbedUrl} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen /></div></div></div></section>
   </>;
 }

@@ -173,6 +173,8 @@ button, input, textarea, select { font: inherit; }
 .venue-card a svg { width: 1rem; }
 .venue-card a .google-maps-icon { width: 1.1rem; height: 1.1rem; flex: none; object-fit: contain; }
 .venue-card a > svg { margin-left: auto; }
+.venue-map { aspect-ratio: 16 / 9; margin-top: 2rem; overflow: hidden; border: 1px solid rgb(14 24 43 / .2); }
+.venue-map iframe { display: block; width: 100%; height: 100%; border: 0; }
 
 .site-footer { background: var(--night); padding-block: 5rem 2rem; color: white; }
 .site-footer > .site-container { width: min(calc(100% - 3rem), 72rem); }
