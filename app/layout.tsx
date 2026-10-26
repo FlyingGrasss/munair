@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Bodoni_Moda, DM_Sans, DM_Serif_Display, Instrument_Serif, Manrope, Space_Grotesk } from "next/font/google";
 import Footer from "@/components/Footer";
 import FontVariant from "@/components/FontVariant";
@@ -115,6 +116,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <main id="main-content">{children}</main>
           {settings.sections.contact && <Footer settings={settings} />}
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
