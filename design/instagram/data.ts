@@ -36,6 +36,9 @@ export type CommitteeDesign = {
   tagline: string;
   motto: string;
   intro: string;
+  image: string;
+  coverTitleSize: number;
+  coverSubtitle: string;
   titleLines: string[];
   titleConnector?: string;
   slideTwoTitle: string[];
@@ -49,7 +52,6 @@ export type CommitteeDesign = {
   cards: DesignCard[];
   accent: string;
   accentSoft: string;
-  watermark: "dragon" | "wordmark";
   year: string;
   yearLabel: string;
 };
@@ -65,6 +67,9 @@ export const COMMITTEE_DESIGNS: Record<string, CommitteeDesign> = {
     motto: "Fire & Blood",
     intro:
       "King Viserys is dead. Two claimants, two councils, and no agreed successor. Delegates govern one of the rival courts, negotiate across a divided realm, and decide how far they will go for the Iron Throne.",
+    image: "/design/instagram/house-of-the-dragons.jpg",
+    coverTitleSize: 118,
+    coverSubtitle: "A TARGARYEN CIVIL WAR, REIMAGINED.",
     titleLines: ["HOUSE", "DRAGONS"],
     titleConnector: "OF THE",
     slideTwoTitle: ["TWO COURTS.", "ONE THRONE."],
@@ -111,7 +116,6 @@ export const COMMITTEE_DESIGNS: Record<string, CommitteeDesign> = {
     ],
     accent: "#b9c9d6",
     accentSoft: "rgba(185, 201, 214, 0.08)",
-    watermark: "dragon",
     year: "129 AC",
     yearLabel: "THE DANCE BEGINS",
   },
@@ -125,6 +129,9 @@ export const COMMITTEE_DESIGNS: Record<string, CommitteeDesign> = {
     motto: "Peace & Security",
     intro:
       "Delegates confront the weapons and technologies that shape international stability — from autonomous systems to nuclear risk and the militarisation of space. Every proposal must balance deterrence with restraint.",
+    image: "/design/instagram/disec.jpg",
+    coverTitleSize: 184,
+    coverSubtitle: "DISARMAMENT & INTERNATIONAL SECURITY",
     titleLines: ["DISEC"],
     slideTwoTitle: ["ONE ROOM.", "GLOBAL STAKES."],
     slideThreeTitle: ["THE", "AGENDA"],
@@ -177,7 +184,6 @@ export const COMMITTEE_DESIGNS: Record<string, CommitteeDesign> = {
     ],
     accent: INSTAGRAM_COLORS.blueLight,
     accentSoft: "rgba(21, 107, 201, 0.12)",
-    watermark: "wordmark",
     year: "2027",
     yearLabel: "THE SESSION OPENS",
   },
@@ -191,6 +197,9 @@ export const COMMITTEE_DESIGNS: Record<string, CommitteeDesign> = {
     motto: "Life Below Water",
     intro:
       "The ocean is a shared resource, a trade route, and a fragile ecosystem. Delegates negotiate protection and production, and decide who pays when the interests of coastal communities, industry, and the climate collide.",
+    image: "/design/instagram/un-ocean.jpg",
+    coverTitleSize: 166,
+    coverSubtitle: "OCEAN AFFAIRS",
     titleLines: ["UN OCEAN"],
     slideTwoTitle: ["A SHARED", "OCEAN."],
     slideThreeTitle: ["THE", "AGENDA"],
@@ -243,7 +252,6 @@ export const COMMITTEE_DESIGNS: Record<string, CommitteeDesign> = {
     ],
     accent: INSTAGRAM_COLORS.blueLight,
     accentSoft: "rgba(21, 107, 201, 0.12)",
-    watermark: "wordmark",
     year: "2027",
     yearLabel: "THE SESSION OPENS",
   },
@@ -257,6 +265,9 @@ export const COMMITTEE_DESIGNS: Record<string, CommitteeDesign> = {
     motto: "Wind & Cartography",
     intro:
       "It is an age of sails, silver, and uncertain maps. Delegates pursue trade, territory, and knowledge while the consequences of contact move faster than any courier. Every claim on the map is a claim on someone's home.",
+    image: "/design/instagram/age-of-discovery.jpg",
+    coverTitleSize: 132,
+    coverSubtitle: "A HISTORICAL CRISIS · 1492",
     titleLines: ["AGE OF", "DISCOVERY"],
     slideTwoTitle: ["THE MAP IS", "NOT THE WORLD."],
     slideThreeTitle: ["THE", "AGENDA"],
@@ -309,7 +320,6 @@ export const COMMITTEE_DESIGNS: Record<string, CommitteeDesign> = {
     ],
     accent: INSTAGRAM_COLORS.blueLight,
     accentSoft: "rgba(21, 107, 201, 0.12)",
-    watermark: "wordmark",
     year: "1492",
     yearLabel: "THE SESSION OPENS",
   },

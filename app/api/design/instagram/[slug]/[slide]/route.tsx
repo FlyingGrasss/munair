@@ -20,8 +20,9 @@ export async function GET(
   }
 
   const fonts = await getInstagramFonts();
+  const assetBaseUrl = new URL("/", _request.url).origin;
 
-  return new ImageResponse(<CommitteeSlide design={design} slide={slide} />, {
+  return new ImageResponse(<CommitteeSlide design={design} slide={slide} assetBaseUrl={assetBaseUrl} />, {
     ...INSTAGRAM_SIZE,
     fonts,
     headers: {
