@@ -206,40 +206,13 @@ function Cover({ design, assetBaseUrl }: SlideProps) {
           </span>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            gap: 40,
-          }}
-        >
-          <div style={{ display: "flex", flexDirection: "column", maxWidth: 610 }}>
-            <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: 3, color: design.accent }}>
-              AGENDA
-            </span>
-            <div style={{ display: "flex", flexDirection: "column", gap: 7, marginTop: 12 }}>
-              {design.agenda.map((item, index) => (
-                <div key={item} style={{ display: "flex", gap: 14 }}>
-                  <span style={{ fontSize: 15, fontWeight: 700, color: design.accent }}>
-                    0{index + 1}
-                  </span>
-                  <span style={{ fontSize: 17, lineHeight: 1.38, color: "rgba(244,248,251,0.82)" }}>
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 7 }}>
-            <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: 2.4, color: design.accent }}>
-              {design.abbr}
-            </span>
-            <span style={{ fontSize: 12, fontWeight: 500, letterSpacing: 2.2, color: "rgba(244,248,251,0.55)" }}>
-              COMMITTEE SERIES
-            </span>
-          </div>
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "flex-end", gap: 12 }}>
+          <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: 2.4, color: design.accent }}>
+            {design.abbr}
+          </span>
+          <span style={{ fontSize: 12, fontWeight: 500, letterSpacing: 2.2, color: "rgba(244,248,251,0.55)" }}>
+            COMMITTEE SERIES
+          </span>
         </div>
       </div>
     </Frame>
