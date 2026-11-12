@@ -46,4 +46,7 @@ next-env.d.ts
 # generated Prisma client
 /lib/generated/prisma/
 
+# generated Instagram design exports
+/design/instagram/out/
+
 .vercel

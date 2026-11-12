@@ -19,6 +19,9 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "1mb",
     },
   },
+  outputFileTracingIncludes: {
+    "/api/design/instagram/*": ["./public/fonts/**/*", "./design/instagram/assets/**/*"],
+  },
 };
 
 export default nextConfig;
