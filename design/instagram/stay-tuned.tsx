@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import { STAY_TUNED } from "./data";
 
 const SANS = "DM Sans";
@@ -15,174 +17,33 @@ const globe = [
   "</svg>",
 ].join("");
 
-function Logo({ assetBaseUrl, width }: { assetBaseUrl: string; width: number }) {
+function Progress({ slide }: { slide: number }) {
   return (
-    <img
-      src={`${assetBaseUrl}/munair_logo_mark.png`}
-      alt=""
-      width={width}
-      height={Math.round(width / LOGO_RATIO)}
-      style={{ width, height: Math.round(width / LOGO_RATIO) }}
-    />
-  );
-}
-
-function ClassicPost({ assetBaseUrl }: { assetBaseUrl: string }) {
-  return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        position: "relative",
-        overflow: "hidden",
-        backgroundColor: "#04080f",
-        color: "#f4f8fb",
-        fontFamily: SANS,
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: 1080,
-          height: 1350,
-          display: "flex",
-          backgroundImage:
-            "linear-gradient(165deg, rgba(9,22,38,1) 0%, rgba(5,12,22,1) 46%, rgba(9,24,42,1) 76%, rgba(4,8,15,1) 100%)",
-        }}
-      />
-
-      <div
-        style={{
-          position: "absolute",
-          top: 30,
-          right: 30,
-          bottom: 30,
-          left: 30,
-          display: "flex",
-          border: "1px solid rgba(255,255,255,0.26)",
-        }}
-      />
-
-      <div
-        style={{
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          flex: 1,
-          justifyContent: "space-between",
-          padding: "52px 64px 46px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ display: "flex", width: 8, height: 8, backgroundColor: ACCENT }} />
-            <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: 3 }}>{STAY_TUNED.edition}</span>
-          </div>
-          <span style={{ fontSize: 14, fontWeight: 500, letterSpacing: 3, color: "rgba(244,248,251,0.62)" }}>
-            {STAY_TUNED.city} · TÜRKİYE
-          </span>
-        </div>
-
+    <div style={{ display: "flex", gap: 7, marginTop: 10 }}>
+      {[1, 2, 3].map((step) => (
         <div
+          key={step}
           style={{
             display: "flex",
-            flex: 1,
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingTop: 40,
+            width: 34,
+            height: 2,
+            backgroundColor: step === slide ? ACCENT : "rgba(255,255,255,0.22)",
           }}
-        >
-          <Logo assetBaseUrl={assetBaseUrl} width={470} />
-
-          <span
-            style={{
-              marginTop: 52,
-              fontSize: 112,
-              fontWeight: 700,
-              lineHeight: 0.9,
-              letterSpacing: -4,
-              textTransform: "uppercase",
-            }}
-          >
-            STAY TUNED
-          </span>
-
-          <span
-            style={{
-              marginTop: 26,
-              fontSize: 17,
-              fontWeight: 500,
-              letterSpacing: 5,
-              color: "rgba(244,248,251,0.66)",
-              textTransform: "uppercase",
-            }}
-          >
-            {STAY_TUNED.kicker}
-          </span>
-
-          <div
-            style={{
-              display: "flex",
-              width: 88,
-              height: 1,
-              marginTop: 62,
-              backgroundColor: "rgba(138,183,218,0.55)",
-            }}
-          />
-          <span
-            style={{
-              marginTop: 24,
-              fontSize: 15,
-              fontWeight: 700,
-              letterSpacing: 7,
-              color: ACCENT,
-              textTransform: "uppercase",
-            }}
-          >
-            Mark the dates
-          </span>
-          <span style={{ marginTop: 10, fontSize: 128, fontWeight: 700, lineHeight: 1, letterSpacing: -5 }}>
-            5 — 6 — 7
-          </span>
-          <span
-            style={{
-              marginTop: 4,
-              fontSize: 34,
-              fontWeight: 700,
-              letterSpacing: 12,
-              color: "rgba(244,248,251,0.86)",
-            }}
-          >
-            MARCH 2027
-          </span>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            paddingTop: 18,
-            borderTop: "1px solid rgba(255,255,255,0.22)",
-          }}
-        >
-          <span style={{ fontSize: 15, fontWeight: 500, letterSpacing: 1.4, color: "rgba(244,248,251,0.64)" }}>
-            modelunair.com · @modelunair
-          </span>
-          <span style={{ fontSize: 15, fontWeight: 500, letterSpacing: 1.4, color: "rgba(244,248,251,0.64)" }}>
-            APPLICATIONS OPENING SOON
-          </span>
-        </div>
-      </div>
+        />
+      ))}
     </div>
   );
 }
 
-function EditorialPost({ assetBaseUrl }: { assetBaseUrl: string }) {
+function Shell({
+  slide,
+  assetBaseUrl,
+  children,
+}: {
+  slide: number;
+  assetBaseUrl: string;
+  children: ReactNode;
+}) {
   return (
     <div
       style={{
@@ -196,115 +57,24 @@ function EditorialPost({ assetBaseUrl }: { assetBaseUrl: string }) {
         fontFamily: SANS,
       }}
     >
-      <img
-        src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(globe)}`}
-        alt=""
-        width={860}
-        height={860}
-        style={{ position: "absolute", left: -230, top: 610, width: 860, height: 860, opacity: 0.42 }}
-      />
-
       <div
         style={{
-          position: "relative",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: 1080,
+          height: 1350,
           display: "flex",
-          flexDirection: "column",
-          flex: 1,
-          padding: "64px 68px 60px",
+          backgroundImage:
+            "linear-gradient(165deg, rgba(11,27,49,1) 0%, rgba(5,12,22,1) 52%, rgba(9,24,42,1) 100%)",
         }}
-      >
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ display: "flex", width: 8, height: 8, backgroundColor: ACCENT }} />
-            <span style={{ fontSize: 16, fontWeight: 700, letterSpacing: 3 }}>{STAY_TUNED.edition}</span>
-          </div>
-          <span style={{ fontSize: 15, fontWeight: 500, letterSpacing: 3, color: "rgba(255,255,255,0.55)" }}>
-            {STAY_TUNED.city} · TÜRKİYE
-          </span>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", marginTop: 118 }}>
-          <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: 6, color: ACCENT, textTransform: "uppercase" }}>
-            The countdown begins
-          </span>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginTop: 22,
-              fontSize: 206,
-              fontWeight: 700,
-              lineHeight: 0.82,
-              letterSpacing: -11,
-              textTransform: "uppercase",
-            }}
-          >
-            <span>STAY</span>
-            <span>TUNED</span>
-          </div>
-          <span style={{ marginTop: 42, fontSize: 40, fontWeight: 700, letterSpacing: -0.5, color: ACCENT }}>
-            5 — 6 — 7 MARCH 2027
-          </span>
-          <span
-            style={{
-              marginTop: 18,
-              fontSize: 17,
-              fontWeight: 500,
-              letterSpacing: 4.5,
-              color: "rgba(255,255,255,0.58)",
-              textTransform: "uppercase",
-            }}
-          >
-            {STAY_TUNED.kicker}
-          </span>
-        </div>
-
-        <div style={{ display: "flex", flex: 1, flexDirection: "column", justifyContent: "flex-end" }}>
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <Logo assetBaseUrl={assetBaseUrl} width={96} />
-              <span style={{ fontSize: 14, fontWeight: 500, letterSpacing: 2, color: "rgba(255,255,255,0.55)" }}>
-                modelunair.com · @modelunair
-              </span>
-            </div>
-            <span
-              style={{
-                fontSize: 15,
-                fontWeight: 700,
-                letterSpacing: 4,
-                color: ACCENT,
-                textTransform: "uppercase",
-              }}
-            >
-              Applications opening soon
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function BoardingPost({ assetBaseUrl }: { assetBaseUrl: string }) {
-  return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        position: "relative",
-        overflow: "hidden",
-        backgroundColor: "#08162a",
-        color: "#ffffff",
-        fontFamily: SANS,
-      }}
-    >
+      />
       <img
         src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(globe)}`}
         alt=""
         width={900}
         height={900}
-        style={{ position: "absolute", right: -300, top: 590, width: 900, height: 900, opacity: 0.3 }}
+        style={{ position: "absolute", left: -230, top: 610, width: 900, height: 900, opacity: 0.33 }}
       />
 
       <div
@@ -313,90 +83,184 @@ function BoardingPost({ assetBaseUrl }: { assetBaseUrl: string }) {
           display: "flex",
           flexDirection: "column",
           flex: 1,
-          padding: "64px 68px 60px",
+          padding: "56px 68px 52px",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{ display: "flex", width: 8, height: 8, backgroundColor: ACCENT }} />
             <span style={{ fontSize: 16, fontWeight: 700, letterSpacing: 3 }}>{STAY_TUNED.edition}</span>
           </div>
-          <span style={{ fontSize: 15, fontWeight: 500, letterSpacing: 3, color: "rgba(255,255,255,0.55)" }}>
-            {STAY_TUNED.city} · TÜRKİYE
-          </span>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", marginTop: 104 }}>
-          <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: 6, color: ACCENT, textTransform: "uppercase" }}>
-            Boarding soon
-          </span>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginTop: 22,
-              fontSize: 176,
-              fontWeight: 700,
-              lineHeight: 0.84,
-              letterSpacing: -9,
-              textTransform: "uppercase",
-            }}
-          >
-            <span>SAVE</span>
-            <span>THE DATE</span>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+            <span style={{ fontSize: 15, fontWeight: 500, letterSpacing: 3, color: "rgba(255,255,255,0.55)" }}>
+              {STAY_TUNED.city} · TÜRKİYE
+            </span>
+            <Progress slide={slide} />
           </div>
         </div>
 
         <div
           style={{
             display: "flex",
-            marginTop: 56,
-            border: "1px solid rgba(169,216,255,0.45)",
+            flex: 1,
+            flexDirection: "column",
+            justifyContent: "center",
           }}
         >
-          <div style={{ display: "flex", flex: 1.5, flexDirection: "column", padding: "30px 32px" }}>
-            <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: 4, color: ACCENT }}>DEPARTURE</span>
-            <span style={{ marginTop: 10, fontSize: 56, fontWeight: 700, letterSpacing: -2, lineHeight: 1 }}>
-              5 — 6 — 7
-            </span>
-            <span style={{ marginTop: 8, fontSize: 19, fontWeight: 700, letterSpacing: 8 }}>MARCH 2027</span>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flex: 1,
-              flexDirection: "column",
-              justifyContent: "center",
-              padding: "30px 32px",
-              borderLeft: "1px dashed rgba(169,216,255,0.45)",
-            }}
-          >
-            <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: 4, color: ACCENT }}>DESTINATION</span>
-            <span style={{ marginTop: 10, fontSize: 46, fontWeight: 700, letterSpacing: -1 }}>İZMİR</span>
-            <span style={{ marginTop: 6, fontSize: 18, fontWeight: 500, letterSpacing: 4 }}>TÜRKİYE · GATE 27</span>
-          </div>
+          {children}
         </div>
 
-        <div style={{ display: "flex", flex: 1, flexDirection: "column", justifyContent: "flex-end" }}>
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <Logo assetBaseUrl={assetBaseUrl} width={96} />
-              <span style={{ fontSize: 14, fontWeight: 500, letterSpacing: 2, color: "rgba(255,255,255,0.55)" }}>
-                modelunair.com · @modelunair
-              </span>
-            </div>
-            <span
-              style={{
-                fontSize: 15,
-                fontWeight: 700,
-                letterSpacing: 4,
-                color: ACCENT,
-                textTransform: "uppercase",
-              }}
-            >
-              Model United Nations of Aviation
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            paddingTop: 16,
+            borderTop: "1px solid rgba(255,255,255,0.2)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <img
+              src={`${assetBaseUrl}/munair_logo_mark.png`}
+              alt=""
+              width={96}
+              height={Math.round(96 / LOGO_RATIO)}
+              style={{ width: 96, height: Math.round(96 / LOGO_RATIO) }}
+            />
+            <span style={{ fontSize: 14, fontWeight: 500, letterSpacing: 2, color: "rgba(255,255,255,0.55)" }}>
+              modelunair.com · @modelunair
             </span>
           </div>
+          <span
+            style={{
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: 4,
+              color: ACCENT,
+              textTransform: "uppercase",
+            }}
+          >
+            Applications opening soon
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Teaser({ assetBaseUrl }: { assetBaseUrl: string }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <img
+        src={`${assetBaseUrl}/munair_logo_mark.png`}
+        alt=""
+        width={360}
+        height={Math.round(360 / LOGO_RATIO)}
+        style={{ width: 360, height: Math.round(360 / LOGO_RATIO) }}
+      />
+      <span
+        style={{
+          marginTop: 40,
+          fontSize: 112,
+          fontWeight: 700,
+          lineHeight: 0.9,
+          letterSpacing: -4,
+          textTransform: "uppercase",
+        }}
+      >
+        STAY TUNED
+      </span>
+      <span
+        style={{
+          marginTop: 24,
+          fontSize: 17,
+          fontWeight: 500,
+          letterSpacing: 5,
+          color: "rgba(255,255,255,0.66)",
+          textTransform: "uppercase",
+        }}
+      >
+        {STAY_TUNED.kicker}
+      </span>
+      <div style={{ display: "flex", width: 88, height: 1, marginTop: 48, backgroundColor: "rgba(169,216,255,0.55)" }} />
+      <span style={{ marginTop: 20, fontSize: 15, fontWeight: 700, letterSpacing: 7, color: ACCENT, textTransform: "uppercase" }}>
+        Mark the dates
+      </span>
+    </div>
+  );
+}
+
+function Reveal() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", marginTop: -40 }}>
+      <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: 6, color: ACCENT, textTransform: "uppercase" }}>
+        The countdown begins
+      </span>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          marginTop: 22,
+          fontSize: 206,
+          fontWeight: 700,
+          lineHeight: 0.82,
+          letterSpacing: -11,
+          textTransform: "uppercase",
+        }}
+      >
+        <span>STAY</span>
+        <span>TUNED</span>
+      </div>
+      <span style={{ marginTop: 40, fontSize: 40, fontWeight: 700, letterSpacing: -0.5, color: ACCENT }}>
+        5 — 6 — 7 MARCH 2027
+      </span>
+    </div>
+  );
+}
+
+function Boarding() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", marginTop: -20 }}>
+      <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: 6, color: ACCENT, textTransform: "uppercase" }}>
+        Boarding soon
+      </span>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          marginTop: 22,
+          fontSize: 166,
+          fontWeight: 700,
+          lineHeight: 0.84,
+          letterSpacing: -9,
+          textTransform: "uppercase",
+        }}
+      >
+        <span>SAVE</span>
+        <span>THE DATE</span>
+      </div>
+
+      <div style={{ display: "flex", marginTop: 52, border: "1px solid rgba(169,216,255,0.45)" }}>
+        <div style={{ display: "flex", flex: 1.5, flexDirection: "column", padding: "28px 30px" }}>
+          <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: 4, color: ACCENT }}>DEPARTURE</span>
+          <span style={{ marginTop: 10, fontSize: 54, fontWeight: 700, letterSpacing: -2, lineHeight: 1 }}>
+            5 — 6 — 7
+          </span>
+          <span style={{ marginTop: 8, fontSize: 18, fontWeight: 700, letterSpacing: 8 }}>MARCH 2027</span>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flex: 1,
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "28px 30px",
+            borderLeft: "1px dashed rgba(169,216,255,0.45)",
+          }}
+        >
+          <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: 4, color: ACCENT }}>DESTINATION</span>
+          <span style={{ marginTop: 10, fontSize: 44, fontWeight: 700, letterSpacing: -1 }}>İZMİR</span>
+          <span style={{ marginTop: 6, fontSize: 17, fontWeight: 500, letterSpacing: 4 }}>TÜRKİYE · GATE 27</span>
         </div>
       </div>
     </div>
@@ -404,7 +268,23 @@ function BoardingPost({ assetBaseUrl }: { assetBaseUrl: string }) {
 }
 
 export function StayTunedPost({ slide, assetBaseUrl }: { slide: number; assetBaseUrl: string }) {
-  if (slide === 1) return <ClassicPost assetBaseUrl={assetBaseUrl} />;
-  if (slide === 2) return <EditorialPost assetBaseUrl={assetBaseUrl} />;
-  return <BoardingPost assetBaseUrl={assetBaseUrl} />;
+  if (slide === 1) {
+    return (
+      <Shell slide={1} assetBaseUrl={assetBaseUrl}>
+        <Teaser assetBaseUrl={assetBaseUrl} />
+      </Shell>
+    );
+  }
+  if (slide === 2) {
+    return (
+      <Shell slide={2} assetBaseUrl={assetBaseUrl}>
+        <Reveal />
+      </Shell>
+    );
+  }
+  return (
+    <Shell slide={3} assetBaseUrl={assetBaseUrl}>
+      <Boarding />
+    </Shell>
+  );
 }
