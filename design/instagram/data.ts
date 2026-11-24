@@ -1,6 +1,7 @@
 export const INSTAGRAM_SIZE = { width: 1080, height: 1350 } as const;
 
 export const SLIDES_PER_COMMITTEE = 2;
+export const STAY_TUNED_SLIDES = 3;
 
 export const INSTAGRAM_COLORS = {
   night: "#05080d",

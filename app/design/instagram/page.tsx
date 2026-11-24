@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { DESIGN_LIST, INSTAGRAM_SIZE, SLIDES_PER_COMMITTEE, STAY_TUNED } from "@/design/instagram/data";
+import { DESIGN_LIST, INSTAGRAM_SIZE, SLIDES_PER_COMMITTEE, STAY_TUNED, STAY_TUNED_SLIDES } from "@/design/instagram/data";
 
 export const metadata: Metadata = {
   title: "Instagram design studio",
@@ -70,7 +70,9 @@ export default function InstagramDesignStudioPage() {
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            <SlideFigure slug={STAY_TUNED.slug} name="Stay tuned" slide={1} />
+            {Array.from({ length: STAY_TUNED_SLIDES }, (_, index) => index + 1).map((slide) => (
+              <SlideFigure key={slide} slug={STAY_TUNED.slug} name="Stay tuned" slide={slide} />
+            ))}
           </div>
         </section>
 

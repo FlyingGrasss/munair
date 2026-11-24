@@ -1,6 +1,12 @@
 import { ImageResponse } from "next/og";
 
-import { getCommitteeDesign, INSTAGRAM_SIZE, SLIDES_PER_COMMITTEE, STAY_TUNED } from "@/design/instagram/data";
+import {
+  getCommitteeDesign,
+  INSTAGRAM_SIZE,
+  SLIDES_PER_COMMITTEE,
+  STAY_TUNED,
+  STAY_TUNED_SLIDES,
+} from "@/design/instagram/data";
 import { getInstagramFonts } from "@/design/instagram/fonts";
 import { CommitteeSlide } from "@/design/instagram/render";
 import { StayTunedPost } from "@/design/instagram/stay-tuned";
@@ -19,9 +25,11 @@ export async function GET(
   const headers = { "Cache-Control": "no-store" };
 
   if (slug === STAY_TUNED.slug) {
-    if (slide !== 1) return new Response("Design not found", { status: 404 });
+    if (!Number.isInteger(slide) || slide < 1 || slide > STAY_TUNED_SLIDES) {
+      return new Response("Design not found", { status: 404 });
+    }
 
-    return new ImageResponse(<StayTunedPost assetBaseUrl={assetBaseUrl} />, {
+    return new ImageResponse(<StayTunedPost slide={slide} assetBaseUrl={assetBaseUrl} />, {
       ...INSTAGRAM_SIZE,
       fonts,
       headers,
