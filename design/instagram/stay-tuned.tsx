@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { STAY_TUNED } from "./data";
 
-const SANS = "DM Sans";
+const SANS = "Ricordo";
 const LOGO_RATIO = 880 / 385;
 const ACCENT = "#a9d8ff";
 
@@ -151,17 +151,20 @@ function Shell({
 function Teaser({ assetBaseUrl }: { assetBaseUrl: string }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <span style={{ fontSize: 16, fontWeight: 700, letterSpacing: 7, color: ACCENT, textTransform: "uppercase" }}>
+        The next edition
+      </span>
       <img
         src={`${assetBaseUrl}/munair_logo_mark.png`}
         alt=""
         width={360}
         height={Math.round(360 / LOGO_RATIO)}
-        style={{ width: 360, height: Math.round(360 / LOGO_RATIO) }}
+        style={{ marginTop: 34, width: 360, height: Math.round(360 / LOGO_RATIO) }}
       />
       <span
         style={{
           marginTop: 40,
-          fontSize: 112,
+          fontSize: 120,
           fontWeight: 700,
           lineHeight: 0.9,
           letterSpacing: -4,
@@ -170,21 +173,18 @@ function Teaser({ assetBaseUrl }: { assetBaseUrl: string }) {
       >
         STAY TUNED
       </span>
+      <div style={{ display: "flex", width: 88, height: 1, marginTop: 44, backgroundColor: "rgba(169,216,255,0.55)" }} />
       <span
         style={{
-          marginTop: 24,
+          marginTop: 22,
           fontSize: 17,
           fontWeight: 500,
-          letterSpacing: 5,
-          color: "rgba(255,255,255,0.66)",
+          letterSpacing: 4,
+          color: "rgba(255,255,255,0.6)",
           textTransform: "uppercase",
         }}
       >
-        {STAY_TUNED.kicker}
-      </span>
-      <div style={{ display: "flex", width: 88, height: 1, marginTop: 48, backgroundColor: "rgba(169,216,255,0.55)" }} />
-      <span style={{ marginTop: 20, fontSize: 15, fontWeight: 700, letterSpacing: 7, color: ACCENT, textTransform: "uppercase" }}>
-        Mark the dates
+        A new chapter begins
       </span>
     </div>
   );
@@ -194,25 +194,34 @@ function Reveal() {
   return (
     <div style={{ display: "flex", flexDirection: "column", marginTop: -40 }}>
       <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: 6, color: ACCENT, textTransform: "uppercase" }}>
-        The countdown begins
+        Mark the dates
       </span>
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          marginTop: 22,
-          fontSize: 206,
+          marginTop: 28,
+          fontSize: 174,
           fontWeight: 700,
-          lineHeight: 0.82,
-          letterSpacing: -11,
+          lineHeight: 1,
+          letterSpacing: -8,
+        }}
+      >
+        5 — 6 — 7
+      </div>
+      <span style={{ marginTop: 8, fontSize: 58, fontWeight: 700, letterSpacing: 6, color: ACCENT }}>
+        MARCH 2027
+      </span>
+      <span
+        style={{
+          marginTop: 34,
+          fontSize: 18,
+          fontWeight: 500,
+          letterSpacing: 5,
+          color: "rgba(255,255,255,0.6)",
           textTransform: "uppercase",
         }}
       >
-        <span>STAY</span>
-        <span>TUNED</span>
-      </div>
-      <span style={{ marginTop: 40, fontSize: 40, fontWeight: 700, letterSpacing: -0.5, color: ACCENT }}>
-        5 — 6 — 7 MARCH 2027
+        Three days of diplomacy in İzmir
       </span>
     </div>
   );
@@ -222,25 +231,24 @@ function Boarding() {
   return (
     <div style={{ display: "flex", flexDirection: "column", marginTop: -20 }}>
       <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: 6, color: ACCENT, textTransform: "uppercase" }}>
-        Boarding soon
+        The destination
       </span>
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
           marginTop: 22,
-          fontSize: 166,
+          fontSize: 196,
           fontWeight: 700,
-          lineHeight: 0.84,
-          letterSpacing: -9,
+          lineHeight: 0.9,
+          letterSpacing: -10,
           textTransform: "uppercase",
         }}
       >
-        <span>SAVE</span>
-        <span>THE DATE</span>
+        İZMİR
       </div>
+      <span style={{ marginTop: 8, fontSize: 44, fontWeight: 700, letterSpacing: 12, color: ACCENT }}>TÜRKİYE</span>
 
-      <div style={{ display: "flex", marginTop: 52, border: "1px solid rgba(169,216,255,0.45)" }}>
+      <div style={{ display: "flex", marginTop: 48, border: "1px solid rgba(169,216,255,0.45)" }}>
         <div style={{ display: "flex", flex: 1.5, flexDirection: "column", padding: "28px 30px" }}>
           <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: 4, color: ACCENT }}>DEPARTURE</span>
           <span style={{ marginTop: 10, fontSize: 54, fontWeight: 700, letterSpacing: -2, lineHeight: 1 }}>

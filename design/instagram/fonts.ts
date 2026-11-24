@@ -24,6 +24,9 @@ export function getInstagramFonts() {
     readFont("DM Sans", "dm-sans-500.woff", 500),
     readFont("DM Sans", "dm-sans-700.woff", 700),
     readFont("DM Serif Display", "dm-serif-display.woff", 400),
+    readFont("Ricordo", "ricordo-extralight.ttf", 400),
+    readFont("Ricordo", "ricordo-medium.ttf", 500),
+    readFont("Ricordo", "ricordo-black.ttf", 700),
   ]);
   return fontsPromise;
 }
