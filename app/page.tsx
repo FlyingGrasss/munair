@@ -48,7 +48,7 @@ export default async function Home() {
             </div>
           </FadeIn>
           <div className="home-hero__image">
-            <Image src="/munair_logo_transparent.png" alt="MUNAIR globe and wings emblem" width={1080} height={1080} priority />
+            <Image src="/munair_logo_mark.png" alt="MUNAIR globe and wings emblem" width={880} height={385} priority />
             <span>Wings of diplomacy</span>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default async function Home() {
 
     {settings.sections.about && <section id="about" className="home-introduction"><div className="site-container">
       <div className="introduction-top"><SectionLabel index="01">MUNAIR</SectionLabel><p>Model United Nations<br />of Aviation</p></div>
-      <div className="introduction-grid"><FadeIn className="introduction-image" direction="none"><Image src="/munair_logo.jpg" alt="MUNAIR globe and wings emblem" fill sizes="(max-width: 767px) 100vw, 55vw" className="logo-placeholder" /></FadeIn><FadeIn className="introduction-copy" delay={100}><h2>A room for<br /><em>better questions.</em></h2><p>MUNAIR’27 is built around research, respectful disagreement, and the confidence to speak when the answer is not obvious.</p><ScrollToSectionLink sectionId="letters">Read the welcome letter <ArrowUpRight aria-hidden="true" /></ScrollToSectionLink></FadeIn></div>
+      <div className="introduction-grid"><FadeIn className="introduction-image" direction="none"><Image src="/munair_logo_plate.jpg" alt="MUNAIR globe and wings emblem" fill sizes="(max-width: 767px) 100vw, 55vw" className="logo-placeholder object-contain" /></FadeIn><FadeIn className="introduction-copy" delay={100}><h2>A room for<br /><em>better questions.</em></h2><p>MUNAIR’27 is built around research, respectful disagreement, and the confidence to speak when the answer is not obvious.</p><ScrollToSectionLink sectionId="letters">Read the welcome letter <ArrowUpRight aria-hidden="true" /></ScrollToSectionLink></FadeIn></div>
     </div></section>}
 
     {settings.sections.committees && <section id="committees" className="home-committees"><div className="site-container">
@@ -69,13 +69,13 @@ export default async function Home() {
     </div></section>}
 
     {settings.sections.letters && <section id="letters" className="home-letter"><div className="site-container letter-grid">
-      <div className="letter-image"><Image src="/munair_logo.jpg" alt="MUNAIR globe and wings emblem" fill sizes="(max-width: 767px) 100vw, 42vw" className="logo-placeholder" /></div>
+      <div className="letter-image"><Image src="/munair_logo_plate.jpg" alt="MUNAIR globe and wings emblem" fill sizes="(max-width: 767px) 100vw, 42vw" className="logo-placeholder object-contain" /></div>
       {settings.letters.map((letter) => <FadeIn key={letter.id} className="letter-copy" delay={100}><SectionLabel index="03">Welcome</SectionLabel><h2>{letter.titlePrefix}<br /><em>{letter.titleHighlight}</em></h2><p className="letter-opening">{letter.opening},</p>{letter.paragraphs.map((paragraph) => <p key={paragraph}>{formatConferenceText(paragraph, settings)}</p>)}<div className="letter-author">{letter.author}</div></FadeIn>)}
     </div></section>}
 
     {settings.sections.team && <section id="team" className="home-team"><div className="site-container">
       <div className="team-top"><SectionLabel index="04">Secretariat</SectionLabel><h2>The people<br />behind the room.</h2></div>
-      <div className="team-grid">{team.map((member, index) => <FadeIn key={member.id} delay={index * 60}><Link href={`/team/${member.slug}`} className="team-card"><div className="team-card__image"><Image src={member.imageUrl || "/munair_logo.jpg"} alt="" fill unoptimized sizes="(max-width: 767px) 50vw, 25vw" className={member.imageUrl ? "team-photo" : "logo-placeholder"} /></div><div className="team-card__meta"><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{member.name}</h3><p>{member.role}</p></div><ArrowUpRight aria-hidden="true" /></div></Link></FadeIn>)}</div>
+      <div className="team-grid">{team.map((member, index) => <FadeIn key={member.id} delay={index * 60}><Link href={`/team/${member.slug}`} className="team-card"><div className="team-card__image"><Image src={member.imageUrl || "/munair_logo_plate.jpg"} alt="" fill unoptimized sizes="(max-width: 767px) 50vw, 25vw" className={member.imageUrl ? "team-photo" : "logo-placeholder"} /></div><div className="team-card__meta"><span>{String(index + 1).padStart(2, "0")}</span><div><h3>{member.name}</h3><p>{member.role}</p></div><ArrowUpRight aria-hidden="true" /></div></Link></FadeIn>)}</div>
     </div></section>}
 
     {settings.sections.applications && <section id="applications" className="home-applications"><div className="site-container">

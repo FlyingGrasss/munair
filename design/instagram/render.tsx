@@ -3,11 +3,24 @@ import type { ReactNode } from "react";
 import { type CommitteeDesign } from "./data";
 
 const SANS = "DM Sans";
+const LOGO_RATIO = 880 / 385;
 
 type SlideProps = {
   design: CommitteeDesign;
   assetBaseUrl: string;
 };
+
+function Logo({ assetBaseUrl, height }: { assetBaseUrl: string; height: number }) {
+  return (
+    <img
+      src={`${assetBaseUrl}/munair_logo_mark.png`}
+      alt=""
+      width={Math.round(height * LOGO_RATIO)}
+      height={height}
+      style={{ height, width: Math.round(height * LOGO_RATIO) }}
+    />
+  );
+}
 
 function ImageLayer({
   design,
@@ -53,7 +66,7 @@ function ImageLayer({
           height: 1350,
           display: "flex",
           backgroundImage:
-            "linear-gradient(180deg, rgba(3,10,20,0.62) 0%, rgba(3,10,20,0.08) 38%, rgba(3,10,20,0.82) 100%)",
+            "linear-gradient(180deg, rgba(3,10,20,0.62) 0%, rgba(3,10,20,0.08) 38%, rgba(3,10,20,0.84) 100%)",
         }}
       />
     </>
@@ -64,13 +77,10 @@ function Frame({
   children,
   design,
   assetBaseUrl,
-  slide,
+  label,
   overlay,
   position = "center",
-}: SlideProps & { children: ReactNode; slide: number; overlay: number; position?: string }) {
-  const topLabel =
-    slide === 1 ? design.kicker : slide === 2 ? `THE COMMITTEE · 02` : `APPLY · 03`;
-
+}: SlideProps & { children: ReactNode; label: string; overlay: number; position?: string }) {
   return (
     <div
       style={{
@@ -104,17 +114,17 @@ function Frame({
           display: "flex",
           flexDirection: "column",
           flex: 1,
-          padding: "52px 64px 44px",
+          padding: "50px 64px 42px",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{ display: "flex", width: 8, height: 8, backgroundColor: design.accent }} />
             <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase" }}>
-              {topLabel}
+              {label}
             </span>
           </div>
-          <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: 3 }}>{"MUNAIR'27"}</span>
+          <Logo assetBaseUrl={assetBaseUrl} height={34} />
         </div>
 
         {children}
@@ -178,7 +188,7 @@ function Title({ design }: { design: CommitteeDesign }) {
 
 function Cover({ design, assetBaseUrl }: SlideProps) {
   return (
-    <Frame design={design} assetBaseUrl={assetBaseUrl} slide={1} overlay={0.22} position="center">
+    <Frame design={design} assetBaseUrl={assetBaseUrl} label={design.kicker} overlay={0.22}>
       <div
         style={{
           display: "flex",
@@ -206,22 +216,38 @@ function Cover({ design, assetBaseUrl }: SlideProps) {
           </span>
         </div>
 
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "flex-end", gap: 12 }}>
-          <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: 2.4, color: design.accent }}>
-            {design.abbr}
-          </span>
-          <span style={{ fontSize: 12, fontWeight: 500, letterSpacing: 2.2, color: "rgba(244,248,251,0.55)" }}>
-            COMMITTEE SERIES
-          </span>
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <div style={{ display: "flex", width: 36, height: 1, backgroundColor: design.accent }} />
+            <span
+              style={{
+                fontSize: 15,
+                fontWeight: 700,
+                letterSpacing: 3,
+                color: "rgba(244,248,251,0.72)",
+                textTransform: "uppercase",
+              }}
+            >
+              {design.motto}
+            </span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: 2.4, color: design.accent }}>
+              {design.abbr}
+            </span>
+            <span style={{ fontSize: 12, fontWeight: 500, letterSpacing: 2.2, color: "rgba(244,248,251,0.55)" }}>
+              COMMITTEE SERIES
+            </span>
+          </div>
         </div>
       </div>
     </Frame>
   );
 }
 
-function Statement({ design, assetBaseUrl }: SlideProps) {
+function Agenda({ design, assetBaseUrl }: SlideProps) {
   return (
-    <Frame design={design} assetBaseUrl={assetBaseUrl} slide={2} overlay={0.36} position="center">
+    <Frame design={design} assetBaseUrl={assetBaseUrl} label="AGENDA · 02" overlay={0.4}>
       <div
         style={{
           display: "flex",
@@ -231,11 +257,24 @@ function Statement({ design, assetBaseUrl }: SlideProps) {
           paddingTop: 24,
         }}
       >
+        <span
+          style={{
+            fontSize: 15,
+            fontWeight: 700,
+            letterSpacing: 3.4,
+            color: design.accent,
+            textTransform: "uppercase",
+          }}
+        >
+          {design.slideTwoKicker}
+        </span>
+
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            fontSize: 104,
+            marginTop: 18,
+            fontSize: 96,
             fontWeight: 700,
             lineHeight: 0.88,
             letterSpacing: -4,
@@ -247,22 +286,61 @@ function Statement({ design, assetBaseUrl }: SlideProps) {
           ))}
         </div>
 
-        <p
-          style={{
-            margin: "36px 0 0",
-            maxWidth: 820,
-            fontSize: 24,
-            lineHeight: 1.55,
-            color: "rgba(244,248,251,0.8)",
-          }}
-        >
-          {design.intro}
-        </p>
+        <div style={{ display: "flex", flexDirection: "column", marginTop: 50 }}>
+          {design.agenda.map((item, index) => (
+            <div
+              key={item}
+              style={{
+                display: "flex",
+                gap: 24,
+                borderTop: "1px solid rgba(255,255,255,0.26)",
+                padding: "24px 0",
+              }}
+            >
+              <span
+                style={{
+                  width: 42,
+                  fontSize: 17,
+                  fontWeight: 700,
+                  letterSpacing: 1,
+                  color: design.accent,
+                  paddingTop: 4,
+                }}
+              >
+                0{index + 1}
+              </span>
+              <div style={{ display: "flex", flex: 1, flexDirection: "column" }}>
+                <span style={{ fontSize: 30, fontWeight: 700, lineHeight: 1.18, letterSpacing: -0.4 }}>
+                  {item}
+                </span>
+                <span
+                  style={{
+                    marginTop: 8,
+                    maxWidth: 800,
+                    fontSize: 18,
+                    lineHeight: 1.42,
+                    color: "rgba(244,248,251,0.66)",
+                  }}
+                >
+                  {design.agendaDetails[index]}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 40 }}>
-          <div style={{ display: "flex", width: 40, height: 1, backgroundColor: design.accent }} />
-          <span style={{ fontSize: 14, fontWeight: 700, letterSpacing: 3, color: design.accent }}>
-            {design.motto.toUpperCase()}
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 34 }}>
+          <div style={{ display: "flex", width: 36, height: 1, backgroundColor: design.accent }} />
+          <span
+            style={{
+              fontSize: 15,
+              fontWeight: 700,
+              letterSpacing: 3,
+              color: "rgba(244,248,251,0.72)",
+              textTransform: "uppercase",
+            }}
+          >
+            {design.motto}
           </span>
         </div>
       </div>
@@ -270,57 +348,7 @@ function Statement({ design, assetBaseUrl }: SlideProps) {
   );
 }
 
-function Apply({ design, assetBaseUrl }: SlideProps) {
-  return (
-    <Frame design={design} assetBaseUrl={assetBaseUrl} slide={3} overlay={0.4} position="center">
-      <div
-        style={{
-          display: "flex",
-          flex: 1,
-          flexDirection: "column",
-          justifyContent: "center",
-          paddingTop: 10,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            fontSize: 118,
-            fontWeight: 700,
-            lineHeight: 0.86,
-            letterSpacing: -5,
-            textTransform: "uppercase",
-          }}
-        >
-          <span>APPLICATIONS</span>
-          <span>OPEN</span>
-        </div>
-
-        <span
-          style={{
-            marginTop: 28,
-            fontSize: 22,
-            fontWeight: 500,
-            letterSpacing: 3,
-            color: "rgba(244,248,251,0.74)",
-            textTransform: "uppercase",
-          }}
-        >
-          DELEGATE · CHAIRBOARD · PRESS
-        </span>
-
-        <div style={{ display: "flex", alignItems: "center", gap: 18, marginTop: 54 }}>
-          <span style={{ fontSize: 34, fontWeight: 700, letterSpacing: -1 }}>modelunair.com</span>
-          <span style={{ fontSize: 38, lineHeight: 1 }}>→</span>
-        </div>
-      </div>
-    </Frame>
-  );
-}
-
 export function CommitteeSlide({ design, slide, assetBaseUrl }: SlideProps & { slide: number }) {
-  if (slide === 1) return <Cover design={design} assetBaseUrl={assetBaseUrl} />;
-  if (slide === 2) return <Statement design={design} assetBaseUrl={assetBaseUrl} />;
-  return <Apply design={design} assetBaseUrl={assetBaseUrl} />;
+  if (slide === 2) return <Agenda design={design} assetBaseUrl={assetBaseUrl} />;
+  return <Cover design={design} assetBaseUrl={assetBaseUrl} />;
 }
