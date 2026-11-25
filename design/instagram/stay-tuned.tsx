@@ -2,40 +2,15 @@ import type { ReactNode } from "react";
 
 import { STAY_TUNED } from "./data";
 
-const SANS = "Ricordo";
+const FONT = "Ricordo";
 const LOGO_RATIO = 880 / 385;
-const ACCENT = "#a9d8ff";
+const INK = "#0c2b4c";
+const BLUE = "#1a6cae";
 
-const globe = [
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none" stroke="#4f7fae" stroke-width="2">',
-  '<circle cx="400" cy="400" r="320" opacity=".55"/>',
-  '<ellipse cx="400" cy="400" rx="320" ry="110" opacity=".55"/>',
-  '<ellipse cx="400" cy="400" rx="320" ry="220" opacity=".55"/>',
-  '<ellipse cx="400" cy="400" rx="110" ry="320" opacity=".55"/>',
-  '<ellipse cx="400" cy="400" rx="220" ry="320" opacity=".55"/>',
-  '<path d="M80 400h640M400 80v640" opacity=".55"/>',
-  "</svg>",
-].join("");
+const WEEKDAYS = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+const DATES = Array.from({ length: 31 }, (_, index) => index + 1);
 
-function Progress({ slide }: { slide: number }) {
-  return (
-    <div style={{ display: "flex", gap: 7, marginTop: 10 }}>
-      {[1, 2, 3].map((step) => (
-        <div
-          key={step}
-          style={{
-            display: "flex",
-            width: 34,
-            height: 2,
-            backgroundColor: step === slide ? ACCENT : "rgba(255,255,255,0.22)",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-function Shell({
+function Panel({
   slide,
   assetBaseUrl,
   children,
@@ -52,30 +27,31 @@ function Shell({
         display: "flex",
         position: "relative",
         overflow: "hidden",
-        backgroundColor: "#0d1c33",
-        color: "#ffffff",
-        fontFamily: SANS,
+        backgroundColor: "#cfe2f0",
+        color: INK,
+        fontFamily: FONT,
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: 1080,
-          height: 1350,
-          display: "flex",
-          backgroundImage:
-            "linear-gradient(165deg, rgba(11,27,49,1) 0%, rgba(5,12,22,1) 52%, rgba(9,24,42,1) 100%)",
-        }}
-      />
       <img
-        src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(globe)}`}
+        src={`${assetBaseUrl}/design/instagram/stay-bg-${slide}.jpg`}
         alt=""
-        width={900}
-        height={900}
-        style={{ position: "absolute", left: -230, top: 610, width: 900, height: 900, opacity: 0.33 }}
+        width={1080}
+        height={1350}
+        style={{ position: "absolute", top: 0, left: 0, width: 1080, height: 1350, objectFit: "cover" }}
       />
+      {slide < 3 ? (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: 3,
+            height: 1350,
+            display: "flex",
+            backgroundColor: "rgba(8,32,56,0.42)",
+          }}
+        />
+      ) : null}
 
       <div
         style={{
@@ -83,193 +59,162 @@ function Shell({
           display: "flex",
           flexDirection: "column",
           flex: 1,
-          padding: "56px 68px 52px",
+          padding: "52px 62px 50px",
         }}
       >
-        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ display: "flex", width: 8, height: 8, backgroundColor: ACCENT }} />
-            <span style={{ fontSize: 16, fontWeight: 700, letterSpacing: 3 }}>{STAY_TUNED.edition}</span>
+            <div style={{ display: "flex", width: 8, height: 8, backgroundColor: BLUE }} />
+            <span style={{ fontSize: 16, fontWeight: 500, letterSpacing: 3 }}>{STAY_TUNED.edition}</span>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-            <span style={{ fontSize: 15, fontWeight: 500, letterSpacing: 3, color: "rgba(255,255,255,0.55)" }}>
-              {STAY_TUNED.city} · TÜRKİYE
-            </span>
-            <Progress slide={slide} />
-          </div>
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            flex: 1,
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          {children}
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            paddingTop: 16,
-            borderTop: "1px solid rgba(255,255,255,0.2)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <img
-              src={`${assetBaseUrl}/munair_logo_mark.png`}
-              alt=""
-              width={96}
-              height={Math.round(96 / LOGO_RATIO)}
-              style={{ width: 96, height: Math.round(96 / LOGO_RATIO) }}
-            />
-            <span style={{ fontSize: 14, fontWeight: 500, letterSpacing: 2, color: "rgba(255,255,255,0.55)" }}>
-              modelunair.com · @modelunair
-            </span>
-          </div>
-          <span
-            style={{
-              fontSize: 14,
-              fontWeight: 700,
-              letterSpacing: 4,
-              color: ACCENT,
-              textTransform: "uppercase",
-            }}
-          >
-            Applications opening soon
+          <span style={{ fontSize: 14, fontWeight: 500, letterSpacing: 3, color: "rgba(12,43,76,0.62)" }}>
+            0{slide} / 03
           </span>
         </div>
+
+        {children}
       </div>
     </div>
   );
 }
 
-function Teaser({ assetBaseUrl }: { assetBaseUrl: string }) {
+function Identity({ assetBaseUrl }: { assetBaseUrl: string }) {
+  const width = 600;
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <span style={{ fontSize: 16, fontWeight: 700, letterSpacing: 7, color: ACCENT, textTransform: "uppercase" }}>
-        The next edition
+    <div
+      style={{
+        display: "flex",
+        flex: 1,
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <span style={{ fontSize: 17, fontWeight: 500, letterSpacing: 8, color: BLUE, textTransform: "uppercase" }}>
+        Stay tuned
       </span>
       <img
-        src={`${assetBaseUrl}/munair_logo_mark.png`}
+        src={`${assetBaseUrl}/munair_logo_mark_dark.png`}
         alt=""
-        width={360}
-        height={Math.round(360 / LOGO_RATIO)}
-        style={{ marginTop: 34, width: 360, height: Math.round(360 / LOGO_RATIO) }}
+        width={width}
+        height={Math.round(width / LOGO_RATIO)}
+        style={{ marginTop: 46, width, height: Math.round(width / LOGO_RATIO) }}
       />
-      <span
-        style={{
-          marginTop: 40,
-          fontSize: 120,
-          fontWeight: 700,
-          lineHeight: 0.9,
-          letterSpacing: -4,
-          textTransform: "uppercase",
-        }}
-      >
-        STAY TUNED
-      </span>
-      <div style={{ display: "flex", width: 88, height: 1, marginTop: 44, backgroundColor: "rgba(169,216,255,0.55)" }} />
-      <span
-        style={{
-          marginTop: 22,
-          fontSize: 17,
-          fontWeight: 500,
-          letterSpacing: 4,
-          color: "rgba(255,255,255,0.6)",
-          textTransform: "uppercase",
-        }}
-      >
-        A new chapter begins
+      <span style={{ marginTop: 42, fontSize: 27, fontWeight: 500, letterSpacing: 2, color: INK }}>
+        #wingsofdiplomacy
       </span>
     </div>
   );
 }
 
-function Reveal() {
+function Statement() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", marginTop: -40 }}>
-      <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: 6, color: ACCENT, textTransform: "uppercase" }}>
-        Mark the dates
+    <div style={{ display: "flex", flex: 1, flexDirection: "column", justifyContent: "center", marginTop: -30 }}>
+      <span style={{ fontSize: 17, fontWeight: 500, letterSpacing: 8, color: BLUE, textTransform: "uppercase" }}>
+        Something is coming
       </span>
       <div
         style={{
           display: "flex",
-          marginTop: 28,
-          fontSize: 174,
+          marginTop: 26,
+          marginLeft: -34,
+          fontSize: 148,
           fontWeight: 700,
-          lineHeight: 1,
-          letterSpacing: -8,
-        }}
-      >
-        5 — 6 — 7
-      </div>
-      <span style={{ marginTop: 8, fontSize: 58, fontWeight: 700, letterSpacing: 6, color: ACCENT }}>
-        MARCH 2027
-      </span>
-      <span
-        style={{
-          marginTop: 34,
-          fontSize: 18,
-          fontWeight: 500,
-          letterSpacing: 5,
-          color: "rgba(255,255,255,0.6)",
+          lineHeight: 0.88,
+          letterSpacing: -6,
           textTransform: "uppercase",
+          whiteSpace: "nowrap",
         }}
       >
-        Three days of diplomacy in İzmir
-      </span>
+        EXPECT
+      </div>
+      <div
+        style={{
+          display: "flex",
+          marginTop: -14,
+          marginLeft: -62,
+          fontSize: 252,
+          fontWeight: 700,
+          lineHeight: 0.88,
+          letterSpacing: -15,
+          textTransform: "uppercase",
+          whiteSpace: "nowrap",
+        }}
+      >
+        THE WIND
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 34 }}>
+        <div style={{ display: "flex", width: 56, height: 2, backgroundColor: BLUE }} />
+        <span style={{ fontSize: 24, fontWeight: 500, letterSpacing: 5, color: BLUE }}>5 — 6 — 7 MARCH 2027</span>
+      </div>
     </div>
   );
 }
 
-function Boarding() {
+function Calendar() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", marginTop: -20 }}>
-      <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: 6, color: ACCENT, textTransform: "uppercase" }}>
-        The destination
-      </span>
-      <div
-        style={{
-          display: "flex",
-          marginTop: 22,
-          fontSize: 196,
-          fontWeight: 700,
-          lineHeight: 0.9,
-          letterSpacing: -10,
-          textTransform: "uppercase",
-        }}
-      >
-        İZMİR
-      </div>
-      <span style={{ marginTop: 8, fontSize: 44, fontWeight: 700, letterSpacing: 12, color: ACCENT }}>TÜRKİYE</span>
+    <div style={{ display: "flex", flex: 1, flexDirection: "column", justifyContent: "center", marginTop: -20 }}>
+      <span style={{ fontSize: 58, fontWeight: 700, letterSpacing: -1, color: BLUE }}>MUNAIR'27</span>
 
-      <div style={{ display: "flex", marginTop: 48, border: "1px solid rgba(169,216,255,0.45)" }}>
-        <div style={{ display: "flex", flex: 1.5, flexDirection: "column", padding: "28px 30px" }}>
-          <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: 4, color: ACCENT }}>DEPARTURE</span>
-          <span style={{ marginTop: 10, fontSize: 54, fontWeight: 700, letterSpacing: -2, lineHeight: 1 }}>
-            5 — 6 — 7
+      <div style={{ display: "flex", marginTop: 24 }}>
+        {WEEKDAYS.map((day) => (
+          <div
+            key={day}
+            style={{
+              display: "flex",
+              flex: 1,
+              justifyContent: "center",
+              fontSize: 15,
+              fontWeight: 500,
+              letterSpacing: 2,
+              color: "rgba(12,43,76,0.66)",
+            }}
+          >
+            {day}
+          </div>
+        ))}
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", marginTop: 8 }}>
+        {[0, 7, 14, 21, 28].map((start) => (
+          <div key={start} style={{ display: "flex", height: 76 }}>
+            {DATES.slice(start, start + 7).map((date) => {
+              const active = date >= 5 && date <= 7;
+              return (
+                <div
+                  key={date}
+                  style={{
+                    display: "flex",
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: active ? BLUE : "transparent",
+                    color: active ? "#ffffff" : INK,
+                    fontSize: 42,
+                    fontWeight: active ? 700 : 500,
+                  }}
+                >
+                  {date}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+
+      <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginTop: 22 }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <span style={{ fontSize: 106, fontWeight: 700, lineHeight: 0.9, letterSpacing: -4, color: "#a8dcf8" }}>
+            MARCH
           </span>
-          <span style={{ marginTop: 8, fontSize: 18, fontWeight: 700, letterSpacing: 8 }}>MARCH 2027</span>
+          <span style={{ marginTop: 8, fontSize: 20, fontWeight: 500, letterSpacing: 2, color: "#ffffff" }}>
+            {STAY_TUNED.city} · TÜRKİYE
+          </span>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flex: 1,
-            flexDirection: "column",
-            justifyContent: "center",
-            padding: "28px 30px",
-            borderLeft: "1px dashed rgba(169,216,255,0.45)",
-          }}
-        >
-          <span style={{ fontSize: 15, fontWeight: 700, letterSpacing: 4, color: ACCENT }}>DESTINATION</span>
-          <span style={{ marginTop: 10, fontSize: 44, fontWeight: 700, letterSpacing: -1 }}>İZMİR</span>
-          <span style={{ marginTop: 6, fontSize: 17, fontWeight: 500, letterSpacing: 4 }}>TÜRKİYE · GATE 27</span>
-        </div>
+        <span style={{ fontSize: 17, fontWeight: 500, letterSpacing: 2, color: "rgba(255,255,255,0.82)" }}>
+          #wingsofdiplomacy
+        </span>
       </div>
     </div>
   );
@@ -278,21 +223,21 @@ function Boarding() {
 export function StayTunedPost({ slide, assetBaseUrl }: { slide: number; assetBaseUrl: string }) {
   if (slide === 1) {
     return (
-      <Shell slide={1} assetBaseUrl={assetBaseUrl}>
-        <Teaser assetBaseUrl={assetBaseUrl} />
-      </Shell>
+      <Panel slide={1} assetBaseUrl={assetBaseUrl}>
+        <Identity assetBaseUrl={assetBaseUrl} />
+      </Panel>
     );
   }
   if (slide === 2) {
     return (
-      <Shell slide={2} assetBaseUrl={assetBaseUrl}>
-        <Reveal />
-      </Shell>
+      <Panel slide={2} assetBaseUrl={assetBaseUrl}>
+        <Statement />
+      </Panel>
     );
   }
   return (
-    <Shell slide={3} assetBaseUrl={assetBaseUrl}>
-      <Boarding />
-    </Shell>
+    <Panel slide={3} assetBaseUrl={assetBaseUrl}>
+      <Calendar />
+    </Panel>
   );
 }
