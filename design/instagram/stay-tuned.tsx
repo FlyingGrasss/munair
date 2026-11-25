@@ -132,12 +132,12 @@ function Statement() {
       <div
         style={{
           display: "flex",
-          marginTop: -14,
-          marginLeft: -62,
-          fontSize: 252,
+          marginTop: -10,
+          marginLeft: -20,
+          fontSize: 186,
           fontWeight: 700,
           lineHeight: 0.88,
-          letterSpacing: -15,
+          letterSpacing: -3,
           textTransform: "uppercase",
           whiteSpace: "nowrap",
         }}
