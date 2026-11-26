@@ -47,7 +47,7 @@ function Panel({
           height: 1350,
           display: "flex",
           backgroundColor: "#020812",
-          opacity: 0.28,
+          opacity: 0.58,
         }}
       />
       {slide < 3 ? (
