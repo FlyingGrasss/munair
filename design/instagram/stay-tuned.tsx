@@ -88,15 +88,15 @@ function Identity({ assetBaseUrl }: { assetBaseUrl: string }) {
         justifyContent: "center",
       }}
     >
-      <span style={{ fontSize: 34, fontWeight: 700, letterSpacing: 6, color: INK }}>MUNAIR'27</span>
+      <span style={{ fontSize: 52, fontWeight: 700, letterSpacing: 7, color: INK }}>MUNAIR'27</span>
       <img
         src={`${assetBaseUrl}/design/instagram/stay-photo-transparent.png`}
         alt=""
         width={width}
         height={height}
-        style={{ marginTop: 34, width, height }}
+        style={{ marginTop: 34, width, height, opacity: 0.72 }}
       />
-      <span style={{ marginTop: 30, fontSize: 26, fontWeight: 500, letterSpacing: 3, color: ACCENT }}>
+      <span style={{ marginTop: 30, fontSize: 38, fontWeight: 500, letterSpacing: 4, color: ACCENT }}>
         #wingsofdiplomacy
       </span>
     </div>
@@ -106,7 +106,7 @@ function Identity({ assetBaseUrl }: { assetBaseUrl: string }) {
 function Statement() {
   return (
     <div style={{ display: "flex", flex: 1, flexDirection: "column", justifyContent: "center", marginTop: -30 }}>
-      <span style={{ fontSize: 18, fontWeight: 500, letterSpacing: 8, color: ACCENT, textTransform: "uppercase" }}>
+      <span style={{ fontSize: 24, fontWeight: 500, letterSpacing: 8, color: ACCENT, textTransform: "uppercase" }}>
         Storm is coming
       </span>
       <div
@@ -114,7 +114,7 @@ function Statement() {
           display: "flex",
           marginTop: 26,
           marginLeft: -34,
-          fontSize: 152,
+          fontSize: 178,
           fontWeight: 700,
           lineHeight: 0.88,
           letterSpacing: -5,
@@ -129,7 +129,7 @@ function Statement() {
           display: "flex",
           marginTop: -18,
           marginLeft: -26,
-          fontSize: 356,
+          fontSize: 390,
           fontWeight: 700,
           lineHeight: 0.82,
           letterSpacing: -8,
@@ -150,7 +150,7 @@ function Dates() {
         style={{
           display: "flex",
           flexDirection: "column",
-          fontSize: 214,
+          fontSize: 236,
           fontWeight: 700,
           lineHeight: 0.8,
           letterSpacing: -8,
@@ -161,13 +161,13 @@ function Dates() {
         <span>6</span>
         <span>7</span>
       </div>
-      <span style={{ marginTop: 16, fontSize: 122, fontWeight: 700, lineHeight: 0.9, letterSpacing: -3, color: ACCENT }}>
+      <span style={{ marginTop: 16, fontSize: 142, fontWeight: 700, lineHeight: 0.9, letterSpacing: -3, color: ACCENT }}>
         MARCH
       </span>
       <span
         style={{
           marginTop: 26,
-          fontSize: 18,
+          fontSize: 24,
           fontWeight: 500,
           letterSpacing: 5,
           color: "rgba(234,244,251,0.7)",
