@@ -75,8 +75,8 @@ function Panel({
 }
 
 function Identity({ assetBaseUrl }: { assetBaseUrl: string }) {
-  const width = 900;
-  const height = 252;
+  const width = 1020;
+  const height = 285;
 
   return (
     <div
@@ -150,7 +150,7 @@ function Dates() {
         style={{
           display: "flex",
           flexDirection: "column",
-          fontSize: 236,
+          fontSize: 292,
           fontWeight: 700,
           lineHeight: 0.8,
           letterSpacing: -8,
@@ -161,7 +161,7 @@ function Dates() {
         <span>6</span>
         <span>7</span>
       </div>
-      <span style={{ marginTop: 16, fontSize: 142, fontWeight: 700, lineHeight: 0.9, letterSpacing: -3, color: ACCENT }}>
+      <span style={{ marginTop: 16, fontSize: 178, fontWeight: 700, lineHeight: 0.9, letterSpacing: -3, color: ACCENT }}>
         MARCH
       </span>
       <span
