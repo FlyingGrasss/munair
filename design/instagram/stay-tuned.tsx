@@ -28,6 +28,7 @@ function Panel({
         backgroundColor: "#04101e",
         color: INK,
         fontFamily: FONT,
+        textShadow: "0px 2px 12px rgba(0, 6, 18, 0.55)",
       }}
     >
       <img
@@ -36,6 +37,18 @@ function Panel({
         width={1080}
         height={1350}
         style={{ position: "absolute", top: 0, left: 0, width: 1080, height: 1350, objectFit: "cover" }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: 1080,
+          height: 1350,
+          display: "flex",
+          backgroundColor: "#020812",
+          opacity: 0.28,
+        }}
       />
       {slide < 3 ? (
         <div
@@ -96,7 +109,7 @@ function Identity({ assetBaseUrl }: { assetBaseUrl: string }) {
         alt=""
         width={width}
         height={height}
-        style={{ marginTop: 34, width, height, opacity: 0.72 }}
+        style={{ marginTop: 34, width, height, opacity: 0.55, filter: "drop-shadow(0px 8px 18px rgba(0, 4, 12, 0.6))" }}
       />
       <span style={{ marginTop: 30, fontSize: 38, fontWeight: 500, letterSpacing: 4, color: ACCENT }}>
         #wingsofdiplomacy
@@ -163,7 +176,7 @@ function Dates() {
         <span>6</span>
         <span>7</span>
       </div>
-      <span style={{ marginTop: 16, fontSize: 178, fontWeight: 700, lineHeight: 0.9, letterSpacing: -3, color: ACCENT }}>
+      <span style={{ marginTop: 16, fontSize: 178, fontWeight: 700, lineHeight: 0.9, letterSpacing: -3, color: "#4b95cf" }}>
         MARCH
       </span>
       <span
