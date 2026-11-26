@@ -8,10 +8,12 @@ const ACCENT = "#7fc8ff";
 
 function Panel({
   slide,
+  variant,
   assetBaseUrl,
   children,
 }: {
   slide: number;
+  variant: number;
   assetBaseUrl: string;
   children: ReactNode;
 }) {
@@ -29,7 +31,7 @@ function Panel({
       }}
     >
       <img
-        src={`${assetBaseUrl}/design/instagram/stay-bg-dark-${slide}.jpg`}
+        src={`${assetBaseUrl}/design/instagram/stay-bg-v${variant}-${slide}.jpg`}
         alt=""
         width={1080}
         height={1350}
@@ -180,23 +182,31 @@ function Dates() {
   );
 }
 
-export function StayTunedPost({ slide, assetBaseUrl }: { slide: number; assetBaseUrl: string }) {
+export function StayTunedPost({
+  slide,
+  variant,
+  assetBaseUrl,
+}: {
+  slide: number;
+  variant: number;
+  assetBaseUrl: string;
+}) {
   if (slide === 1) {
     return (
-      <Panel slide={1} assetBaseUrl={assetBaseUrl}>
+      <Panel slide={1} variant={variant} assetBaseUrl={assetBaseUrl}>
         <Identity assetBaseUrl={assetBaseUrl} />
       </Panel>
     );
   }
   if (slide === 2) {
     return (
-      <Panel slide={2} assetBaseUrl={assetBaseUrl}>
+      <Panel slide={2} variant={variant} assetBaseUrl={assetBaseUrl}>
         <Statement />
       </Panel>
     );
   }
   return (
-    <Panel slide={3} assetBaseUrl={assetBaseUrl}>
+    <Panel slide={3} variant={variant} assetBaseUrl={assetBaseUrl}>
       <Dates />
     </Panel>
   );

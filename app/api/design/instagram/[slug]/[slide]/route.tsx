@@ -6,6 +6,7 @@ import {
   SLIDES_PER_COMMITTEE,
   STAY_TUNED,
   STAY_TUNED_SLIDES,
+  STAY_TUNED_VARIANTS,
 } from "@/design/instagram/data";
 import { getInstagramFonts } from "@/design/instagram/fonts";
 import { CommitteeSlide } from "@/design/instagram/render";
@@ -22,6 +23,10 @@ export async function GET(
   const slide = Number.parseInt(slideParam, 10);
   const fonts = await getInstagramFonts();
   const assetBaseUrl = new URL("/", request.url).origin;
+  const requestedVariant = Number.parseInt(new URL(request.url).searchParams.get("v") ?? "1", 10);
+  const variant = Number.isInteger(requestedVariant)
+    ? Math.min(STAY_TUNED_VARIANTS, Math.max(1, requestedVariant))
+    : 1;
   const headers = { "Cache-Control": "no-store" };
 
   if (slug === STAY_TUNED.slug) {
@@ -29,7 +34,7 @@ export async function GET(
       return new Response("Design not found", { status: 404 });
     }
 
-    return new ImageResponse(<StayTunedPost slide={slide} assetBaseUrl={assetBaseUrl} />, {
+    return new ImageResponse(<StayTunedPost slide={slide} variant={variant} assetBaseUrl={assetBaseUrl} />, {
       ...INSTAGRAM_SIZE,
       fonts,
       headers,
