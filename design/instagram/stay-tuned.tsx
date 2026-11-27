@@ -105,11 +105,11 @@ function Identity({ assetBaseUrl }: { assetBaseUrl: string }) {
     >
       <span style={{ fontSize: 52, fontWeight: 700, letterSpacing: 7, color: INK }}>MUNAIR'27</span>
       <img
-        src={`${assetBaseUrl}/design/instagram/stay-emblem.png`}
+        src={`${assetBaseUrl}/munair_logo_mark.png`}
         alt=""
         width={width}
         height={height}
-        style={{ marginTop: 34, width, height, opacity: 0.86, filter: "drop-shadow(0px 6px 14px rgba(8, 30, 62, 0.35))" }}
+        style={{ marginTop: 34, width, height, opacity: 0.9 }}
       />
       <span style={{ marginTop: 30, fontSize: 38, fontWeight: 500, letterSpacing: 4, color: ACCENT }}>
         #wingsofdiplomacy
@@ -176,7 +176,7 @@ function Dates() {
         <span>6</span>
         <span>7</span>
       </div>
-      <span style={{ marginTop: 16, fontSize: 178, fontWeight: 700, lineHeight: 0.9, letterSpacing: -3, color: "#4b95cf" }}>
+      <span style={{ marginTop: 16, fontSize: 178, fontWeight: 700, lineHeight: 0.9, letterSpacing: -3, color: "#9fc9e8" }}>
         MARCH
       </span>
       <span
