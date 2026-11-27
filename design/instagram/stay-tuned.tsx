@@ -90,8 +90,8 @@ function Panel({
 }
 
 function Identity({ assetBaseUrl }: { assetBaseUrl: string }) {
-  const width = 820;
-  const height = 359;
+  const width = 900;
+  const height = 247;
 
   return (
     <div
@@ -105,7 +105,7 @@ function Identity({ assetBaseUrl }: { assetBaseUrl: string }) {
     >
       <span style={{ fontSize: 52, fontWeight: 700, letterSpacing: 7, color: INK }}>MUNAIR'27</span>
       <img
-        src={`${assetBaseUrl}/munair_logo_mark.png`}
+        src={`${assetBaseUrl}/design/instagram/stay-emblem-double.png`}
         alt=""
         width={width}
         height={height}
