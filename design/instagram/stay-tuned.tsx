@@ -135,7 +135,6 @@ function Statement() {
           letterSpacing: -5,
           textTransform: "uppercase",
           whiteSpace: "nowrap",
-          color: "#f0f9ff",
         }}
       >
         EXPECT
@@ -151,7 +150,6 @@ function Statement() {
           letterSpacing: -8,
           textTransform: "uppercase",
           whiteSpace: "nowrap",
-          color: "#9cccef",
         }}
       >
         US
@@ -174,9 +172,9 @@ function Dates() {
           color: INK,
         }}
       >
-        <span style={{ color: "#f2faff" }}>5</span>
-        <span style={{ color: "#cfe7f8" }}>6</span>
-        <span style={{ color: "#9cccef" }}>7</span>
+        <span>5</span>
+        <span>6</span>
+        <span>7</span>
       </div>
       <span style={{ marginTop: 16, fontSize: 178, fontWeight: 700, lineHeight: 0.9, letterSpacing: -3, color: "#9fc9e8" }}>
         MARCH
