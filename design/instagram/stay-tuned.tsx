@@ -90,8 +90,8 @@ function Panel({
 }
 
 function Identity({ assetBaseUrl }: { assetBaseUrl: string }) {
-  const width = 1020;
-  const height = 285;
+  const width = 820;
+  const height = 359;
 
   return (
     <div
@@ -105,11 +105,11 @@ function Identity({ assetBaseUrl }: { assetBaseUrl: string }) {
     >
       <span style={{ fontSize: 52, fontWeight: 700, letterSpacing: 7, color: INK }}>MUNAIR'27</span>
       <img
-        src={`${assetBaseUrl}/design/instagram/stay-photo-transparent.png`}
+        src={`${assetBaseUrl}/design/instagram/stay-emblem.png`}
         alt=""
         width={width}
         height={height}
-        style={{ marginTop: 34, width, height, opacity: 0.55, filter: "drop-shadow(0px 8px 18px rgba(0, 4, 12, 0.6))" }}
+        style={{ marginTop: 34, width, height, opacity: 0.86, filter: "drop-shadow(0px 6px 14px rgba(8, 30, 62, 0.35))" }}
       />
       <span style={{ marginTop: 30, fontSize: 38, fontWeight: 500, letterSpacing: 4, color: ACCENT }}>
         #wingsofdiplomacy
@@ -128,7 +128,7 @@ function Statement() {
         style={{
           display: "flex",
           marginTop: 26,
-          marginLeft: -34,
+          marginLeft: 30,
           fontSize: 178,
           fontWeight: 700,
           lineHeight: 0.88,
@@ -143,7 +143,7 @@ function Statement() {
         style={{
           display: "flex",
           marginTop: -18,
-          marginLeft: -26,
+          marginLeft: 46,
           fontSize: 390,
           fontWeight: 700,
           lineHeight: 0.82,
